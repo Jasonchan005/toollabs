@@ -28,12 +28,13 @@
   function formatSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
   }
 
   function handleFile(file) {
     if (!file.name.toLowerCase().endsWith('.pdf')) { showStatus('Please select a PDF file.', true); return; }
-    if (file.size > 200 * 1024 * 1024) { showStatus('File exceeds 200MB limit.', true); return; }
+    if (file.size > 1024 * 1024 * 1024) { showStatus('File exceeds 1GB limit.', true); return; }
     selectedFile = file;
     fileName.textContent = file.name;
     fileSize.textContent = formatSize(file.size);
@@ -41,6 +42,7 @@
     dropZone.style.display = 'none';
     compressBtn.disabled = false;
     hideStatus();
+    resultContainer.classList.remove('show');
   }
 
   dropZone.addEventListener('click', function() {
@@ -50,7 +52,6 @@
     input.addEventListener('change', function() { if (this.files && this.files.length > 0) handleFile(this.files[0]); document.body.removeChild(input); });
     input.click();
   });
-
   dropZone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('dragover'); });
   dropZone.addEventListener('dragleave', function(e) { e.preventDefault(); this.classList.remove('dragover'); });
   dropZone.addEventListener('drop', function(e) {
@@ -58,6 +59,63 @@
     if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
   });
 
+  // === Split-compress-merge for large PDFs ===
+  async function compressPDF(arrayBuffer, level) {
+    var useObjStreams = level !== 'low';
+    var chunkPageSize = level === 'high' ? 30 : 50;
+
+    // Load original
+    var srcDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+    var totalPages = srcDoc.getPageCount();
+
+    // Clean metadata
+    srcDoc.setTitle(''); srcDoc.setAuthor(''); srcDoc.setSubject('');
+    srcDoc.setKeywords([]); srcDoc.setProducer('ToolLabs Compressor'); srcDoc.setCreator('ToolLabs');
+
+    // If small file, just save directly
+    if (totalPages <= chunkPageSize) {
+      progressText.textContent = 'Compressing...';
+      return await srcDoc.save({ useObjectStreams: useObjStreams });
+    }
+
+    // Large file: split into chunks, compress each, merge back
+    var chunks = [];
+    var numChunks = Math.ceil(totalPages / chunkPageSize);
+
+    for (var c = 0; c < numChunks; c++) {
+      var start = c * chunkPageSize;
+      var end = Math.min(start + chunkPageSize, totalPages);
+      var pageIndices = [];
+      for (var p = start; p < end; p++) pageIndices.push(p);
+
+      progressText.textContent = 'Splitting & compressing part ' + (c + 1) + ' of ' + numChunks + '...';
+      progressBarFill.style.width = Math.round((c / numChunks) * 70) + '%';
+
+      var subDoc = await PDFLib.PDFDocument.create();
+      var copiedPages = await subDoc.copyPages(srcDoc, pageIndices);
+      for (var pi = 0; pi < copiedPages.length; pi++) subDoc.addPage(copiedPages[pi]);
+
+      var subBytes = await subDoc.save({ useObjectStreams: useObjStreams });
+      chunks.push(subBytes);
+
+      // Free memory hint: let subDoc go out of scope
+    }
+
+    // Merge all compressed chunks
+    progressText.textContent = 'Merging ' + numChunks + ' parts...';
+    progressBarFill.style.width = '80%';
+
+    var finalDoc = await PDFLib.PDFDocument.create();
+    for (var ci = 0; ci < chunks.length; ci++) {
+      var chunkDoc = await PDFLib.PDFDocument.load(chunks[ci]);
+      var chunkPages = await finalDoc.copyPages(chunkDoc, chunkDoc.getPageIndices());
+      for (var pi2 = 0; pi2 < chunkPages.length; pi2++) finalDoc.addPage(chunkPages[pi2]);
+    }
+
+    return await finalDoc.save({ useObjectStreams: useObjStreams });
+  }
+
+  // === Compress Button ===
   compressBtn.addEventListener('click', async function() {
     if (!selectedFile) return;
 
@@ -70,46 +128,17 @@
     try {
       var originalSize = selectedFile.size;
       var arrayBuffer = await selectedFile.arrayBuffer();
-      progressBarFill.style.width = '30%';
-      progressText.textContent = 'Compressing...';
+      progressBarFill.style.width = '10%';
 
-      // Load with pdf-lib
-      var pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, {
-        ignoreEncryption: true,
-        updateMetadata: false
-      });
-
-      progressBarFill.style.width = '50%';
-      progressText.textContent = 'Optimizing structure...';
-
-      // Remove metadata to save space
-      pdfDoc.setTitle('');
-      pdfDoc.setAuthor('');
-      pdfDoc.setSubject('');
-      pdfDoc.setKeywords([]);
-      pdfDoc.setProducer('ToolLabs PDF Compressor');
-      pdfDoc.setCreator('ToolLabs');
-
-      // Get compression settings
       var level = compressLevel.value;
+      var compressedBytes = await compressPDF(arrayBuffer, level);
 
-      progressBarFill.style.width = '70%';
-      progressText.textContent = 'Writing compressed PDF...';
-
-      // Save with compression options
-      var compressedBytes = await pdfDoc.save({
-        useObjectStreams: level !== 'low',
-        addDefaultPage: false,
-        objectsPerTick: level === 'high' ? 10 : 50
-      });
-
-      progressBarFill.style.width = '90%';
-      progressText.textContent = 'Done!';
+      progressBarFill.style.width = '95%';
+      progressText.textContent = 'Finalizing...';
 
       var compressedSize = compressedBytes.length;
       var savings = Math.round((1 - compressedSize / originalSize) * 100);
 
-      // Prepare download
       var blob = new Blob([compressedBytes], { type: 'application/pdf' });
       var url = URL.createObjectURL(blob);
       downloadBtn.href = url;
@@ -118,10 +147,8 @@
       compressResultText.textContent = 'Reduced from ' + formatSize(originalSize) + ' to ' + formatSize(compressedSize) + ' (' + savings + '% reduction)';
 
       progressBarFill.style.width = '100%';
-      setTimeout(function() {
-        progressContainer.classList.remove('show');
-        resultContainer.classList.add('show');
-      }, 500);
+      progressText.textContent = 'Done!';
+      setTimeout(function() { progressContainer.classList.remove('show'); resultContainer.classList.add('show'); }, 500);
 
     } catch (err) {
       showStatus('Error: ' + (err.message || 'Compression failed'), true);
