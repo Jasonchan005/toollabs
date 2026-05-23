@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF to Word Converter – No Upload, 100% Free</title>
+  <meta name="description" content="Convert PDF to Word document online for free. No uploads required — all processing happens in your browser.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">ToolLabs <span class="logo-tag">Free Online Tools</span></a>
+      <p class="tagline">100% free. No uploads. All processing happens in your browser.</p>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <h1>Free PDF to Word Converter</h1>
+        <p>Upload a PDF and convert it to an editable Word (.docx) document. Your file never leaves your device.</p>
+      </div>
+
+      <div class="tool-container">
+        <div id="statusMsg" style="display:none;padding:12px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:14px;font-weight:600;"></div>
+
+        <!-- Drop Zone -->
+        <div class="upload-area" id="dropZone">
+          <div class="upload-icon">📄</div>
+          <h3>Click here or drop a PDF file</h3>
+          <p>Maximum file size: 100MB. All processing is done in your browser.</p>
+        </div>
+
+        <!-- File Info -->
+        <div class="file-info" id="fileInfo">
+          <span>📄</span>
+          <span class="file-name" id="fileName">document.pdf</span>
+          <span class="file-size" id="fileSize">0 KB</span>
+          <button class="btn btn-primary" id="convertBtn" disabled>Convert to Word</button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+          <p class="progress-text" id="progressText">Processing...</p>
+        </div>
+
+        <!-- Result -->
+        <div class="result-container" id="resultContainer">
+          <div class="result-icon">✅</div>
+          <h3>Conversion Complete!</h3>
+          <p>Your Word document is ready to download.</p>
+          <a class="btn btn-success" id="downloadBtn" download="document.docx">Download Word Document</a>
+          <p style="margin-top:15px;font-size:0.85rem;color:#64748b;">Convert another PDF? <a href="/pdf-to-word" style="color:#2563eb;">Refresh the page</a>.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 ToolLabs — Free PDF to Word Converter. Your privacy is guaranteed.</p>
+      <nav><a href="/">Home</a> &middot; <a href="/pdf-to-word">PDF to Word</a></nav>
+    </div>
+  </footer>
+
+  <script src="/lib/pdf.min.js"></script>
+  <script src="/lib/docx.umd.min.js"></script>
+  <script src="/js/pdf-to-word.js"></script>
+</body>
+</html>
