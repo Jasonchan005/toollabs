@@ -49,6 +49,9 @@
     progressBarFill.style.width = '0%'; progressText.textContent = 'Reading Word document...';
 
     try {
+      // Register fontkit for custom font embedding
+      PDFLib.PDFDocument.registerFontkit(fontkit);
+
       // Load Chinese font
       progressText.textContent = 'Loading Chinese font...';
       var fontResponse = await fetch('/lib/NotoSansSC.otf');
