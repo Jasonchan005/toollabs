@@ -33,7 +33,7 @@
 
   function handleFile(file) {
     if (!file.name.toLowerCase().endsWith('.pdf')) { showStatus('Please select a PDF file.', true); return; }
-    if (file.size > 100 * 1024 * 1024) { showStatus('File exceeds 100MB limit.', true); return; }
+    if (file.size > 200 * 1024 * 1024) { showStatus('File exceeds 200MB limit.', true); return; }
     selectedFile = file;
     fileName.textContent = file.name;
     fileSize.textContent = formatSize(file.size);
