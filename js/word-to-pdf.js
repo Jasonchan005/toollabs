@@ -49,6 +49,12 @@
     progressBarFill.style.width = '0%'; progressText.textContent = 'Reading Word document...';
 
     try {
+      // Load Chinese font
+      progressText.textContent = 'Loading Chinese font...';
+      var fontResponse = await fetch('/lib/NotoSansSC.otf');
+      var fontBytes = await fontResponse.arrayBuffer();
+      progressBarFill.style.width = '15%';
+
       var arrayBuffer = await selectedFile.arrayBuffer();
       progressBarFill.style.width = '30%';
       progressText.textContent = 'Converting to PDF...';
@@ -62,7 +68,7 @@
 
       // Create PDF with pdf-lib
       var pdfDoc = await PDFLib.PDFDocument.create();
-      var font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+      var font = await pdfDoc.embedFont(fontBytes);
       var fontSize = 11;
       var pageWidth = 595; // A4
       var pageHeight = 842;
