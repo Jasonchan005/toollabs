@@ -3,3 +3,4 @@
 
 # Private credentials
 .private/
+.playwright-cli/
