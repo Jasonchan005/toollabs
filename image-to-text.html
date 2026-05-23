@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image to Text OCR – Extract Text from Images | ToolLabs</title>
+  <meta name="description" content="Extract text from images, screenshots, and scanned documents for free. OCR supports English, Chinese, and 100+ languages. All processing happens in your browser.">
+  <meta name="keywords" content="image to text, OCR, extract text from image, picture to text, online OCR, free OCR">
+  <link rel="canonical" href="https://toollabs-phi.vercel.app/image-to-text">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .ocr-language-select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; margin-top: 15px; font-size: 14px; background: white; }
+    .ocr-preview { max-width: 100%; max-height: 400px; border-radius: 8px; margin-top: 15px; display: none; }
+    .ocr-preview.show { display: block; }
+    .ocr-result-box { width: 100%; min-height: 200px; padding: 15px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; line-height: 1.6; resize: vertical; margin-top: 15px; display: none; font-family: inherit; }
+    .ocr-result-box.show { display: block; }
+    .ocr-warning { background: #fef3c7; color: #92400e; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 15px; line-height: 1.5; }
+    .ocr-warning strong { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">ToolLabs <span class="logo-tag">Free Online Tools</span></a>
+      <p class="tagline">100% free. No uploads. All processing happens in your browser.</p>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <h1>Image to Text OCR</h1>
+        <p>Extract text from images, screenshots, and scanned documents. Supports Chinese, English, and 100+ languages. Your image never leaves your device.</p>
+      </div>
+
+      <div class="tool-container">
+        <div id="statusMsg" style="display:none;padding:12px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:14px;font-weight:600;"></div>
+
+        <div class="ocr-warning">
+          <strong>First-time use notice</strong>
+          OCR requires downloading a language pack (~15MB) on the first use. This only happens once and is cached in your browser. Subsequent uses will be instant.
+        </div>
+
+        <!-- Drop Zone -->
+        <div class="upload-area" id="dropZone">
+          <div class="upload-icon">🔍</div>
+          <h3>Upload an image to extract text</h3>
+          <p>Supports JPG, PNG, WebP, BMP. Max 20MB.</p>
+        </div>
+
+        <!-- Image Preview -->
+        <img class="ocr-preview" id="imagePreview" alt="Uploaded image">
+
+        <!-- Language Select -->
+        <select class="ocr-language-select" id="langSelect">
+          <option value="chi_sim+eng">Chinese (Simplified) + English</option>
+          <option value="eng">English only</option>
+          <option value="chi_sim">Chinese (Simplified) only</option>
+          <option value="chi_tra">Chinese (Traditional)</option>
+          <option value="jpn">Japanese</option>
+          <option value="kor">Korean</option>
+          <option value="fra">French</option>
+          <option value="deu">German</option>
+          <option value="spa">Spanish</option>
+          <option value="por">Portuguese</option>
+        </select>
+
+        <!-- Convert Button -->
+        <div style="margin-top:15px;text-align:center;">
+          <button class="btn btn-primary" id="extractBtn" disabled>Extract Text from Image</button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+          <p class="progress-text" id="progressText">Processing...</p>
+        </div>
+
+        <!-- Result -->
+        <textarea class="ocr-result-box" id="resultBox" placeholder="Extracted text will appear here..." readonly></textarea>
+        <div style="margin-top:10px;text-align:center;display:none;" id="resultActions">
+          <button class="btn btn-primary" onclick="copyResult()">Copy to Clipboard</button>
+          <button class="btn" style="margin-left:8px;background:var(--border);" onclick="downloadResult()">Download as .txt</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 ToolLabs — Free OCR Tool. Your privacy is guaranteed — no server uploads.</p>
+      <nav><a href="/">Home</a> &middot; <a href="/image-to-text">Image to Text OCR</a></nav>
+    </div>
+  </footer>
+
+  <script src="/lib/tesseract.min.js"></script>
+  <script src="/js/image-to-text.js"></script>
+</body>
+</html>
