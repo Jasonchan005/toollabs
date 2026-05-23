@@ -70,6 +70,101 @@
     if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
   });
 
+  // === Image Preprocessing (enhance for OCR) ===
+  function preprocessImage(file) {
+    return new Promise(function(resolve, reject) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+
+        // Resize if too large (Tesseract works best with 2000px width)
+        var maxW = 2000;
+        var w = img.width;
+        var h = img.height;
+        if (w > maxW) {
+          h = Math.round(h * maxW / w);
+          w = maxW;
+        }
+
+        canvas.width = w;
+        canvas.height = h;
+        ctx.drawImage(img, 0, 0, w, h);
+
+        // Get pixel data
+        var imageData = ctx.getImageData(0, 0, w, h);
+        var data = imageData.data;
+
+        // Step 1: Grayscale + auto contrast
+        var minVal = 255, maxVal = 0;
+        var grayscale = new Uint8Array(data.length / 4);
+        for (var i = 0; i < data.length; i += 4) {
+          var gray = Math.round(0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2]);
+          grayscale[i/4] = gray;
+          if (gray < minVal) minVal = gray;
+          if (gray > maxVal) maxVal = gray;
+        }
+
+        // Step 2: Contrast stretch
+        var range = maxVal - minVal;
+        if (range < 1) range = 1;
+
+        // Step 3: Apply to pixels
+        for (var j = 0; j < data.length; j += 4) {
+          var idx = j / 4;
+          var stretched = Math.round((grayscale[idx] - minVal) / range * 255);
+          stretched = Math.max(0, Math.min(255, stretched));
+
+          // Simple threshold binarization (make text black, bg white)
+          var threshold = 128;
+          var binary = stretched > threshold ? 255 : 0;
+
+          data[j] = binary;     // R
+          data[j+1] = binary;   // G
+          data[j+2] = binary;   // B
+          data[j+3] = 255;      // A (opaque)
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        // Step 4: Apply sharpening kernel
+        var sharpData = ctx.getImageData(0, 0, w, h);
+        var sharpPixels = sharpData.data;
+        var outputData = new Uint8ClampedArray(sharpPixels);
+
+        // Simple sharpen: for each pixel, subtract Laplacian
+        for (var y = 1; y < h - 1; y++) {
+          for (var x = 1; x < w - 1; x++) {
+            var pos = (y * w + x) * 4;
+            var p_l = ((y * w + (x-1)) * 4);
+            var p_r = ((y * w + (x+1)) * 4);
+            var p_u = (((y-1) * w + x) * 4);
+            var p_d = (((y+1) * w + x) * 4);
+
+            for (var c = 0; c < 3; c++) {
+              var val = sharpPixels[pos + c] * 5 -
+                        sharpPixels[p_l + c] -
+                        sharpPixels[p_r + c] -
+                        sharpPixels[p_u + c] -
+                        sharpPixels[p_d + c];
+              outputData[pos + c] = Math.max(0, Math.min(255, val));
+            }
+          }
+        }
+
+        sharpData.data.set(outputData);
+        ctx.putImageData(sharpData, 0, 0);
+
+        // Convert to blob
+        canvas.toBlob(function(blob) {
+          resolve(blob);
+        }, 'image/png');
+      };
+      img.onerror = function() { reject(new Error('Failed to load image')); };
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
   // === Extract Text ===
   extractBtn.addEventListener('click', async function() {
     if (!selectedFile) return;
@@ -88,8 +183,15 @@
     try {
       var lang = langSelect.value;
 
+      // Preprocess image first
+      progressText.textContent = 'Enhancing image for OCR...';
+      progressBarFill.style.width = '5%';
+      var processedBlob = await preprocessImage(selectedFile);
+      progressBarFill.style.width = '15%';
+      progressText.textContent = 'Starting OCR engine...';
+
       var result = await Tesseract.recognize(
-        selectedFile,
+        processedBlob,
         lang,
         {
           logger: function(m) {
