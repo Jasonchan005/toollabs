@@ -60,9 +60,8 @@
   });
 
   // === Split-compress-merge for large PDFs ===
-  async function compressPDF(arrayBuffer, level) {
+  async function compressPDF(arrayBuffer, level, fileSize) {
     var useObjStreams = level !== 'low';
-    var chunkPageSize = level === 'high' ? 30 : 50;
 
     // Load original
     var srcDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
@@ -72,13 +71,14 @@
     srcDoc.setTitle(''); srcDoc.setAuthor(''); srcDoc.setSubject('');
     srcDoc.setKeywords([]); srcDoc.setProducer('ToolLabs Compressor'); srcDoc.setCreator('ToolLabs');
 
-    // If small file, just save directly
-    if (totalPages <= chunkPageSize) {
-      progressText.textContent = 'Compressing...';
+    // Files under 500MB: direct compression (proven, safe)
+    if (fileSize < 500 * 1024 * 1024) {
+      progressText.textContent = 'Compressing (' + totalPages + ' pages)...';
       return await srcDoc.save({ useObjectStreams: useObjStreams });
     }
 
-    // Large file: split into chunks, compress each, merge back
+    // Files over 500MB: split into chunks, compress each, merge back
+    var chunkPageSize = level === 'high' ? 30 : 50;
     var chunks = [];
     var numChunks = Math.ceil(totalPages / chunkPageSize);
 
@@ -131,7 +131,7 @@
       progressBarFill.style.width = '10%';
 
       var level = compressLevel.value;
-      var compressedBytes = await compressPDF(arrayBuffer, level);
+      var compressedBytes = await compressPDF(arrayBuffer, level, originalSize);
 
       progressBarFill.style.width = '95%';
       progressText.textContent = 'Finalizing...';
