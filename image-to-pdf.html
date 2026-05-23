@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image to PDF Converter – JPG/PNG to PDF Online | ToolLabs</title>
+  <meta name="description" content="Convert JPG, PNG, WebP images to PDF online for free. Combine multiple images into one PDF. All processing in your browser.">
+  <meta name="keywords" content="image to PDF, JPG to PDF, PNG to PDF, pictures to PDF, free image to PDF converter">
+  <link rel="canonical" href="https://toollabs-phi.vercel.app/image-to-pdf">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .image-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .image-thumb { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--border); }
+    .image-thumb.selected { border-color: var(--primary); }
+    .image-count { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">ToolLabs <span class="logo-tag">Free Online Tools</span></a>
+      <p class="tagline">100% free. No uploads. All processing happens in your browser.</p>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <h1>Image to PDF Converter</h1>
+        <p>Convert one or more images (JPG, PNG, WebP) into a single PDF file. All processing in your browser.</p>
+      </div>
+
+      <div class="tool-container">
+        <div id="statusMsg" style="display:none;padding:12px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:14px;font-weight:600;"></div>
+
+        <div class="upload-area" id="dropZone">
+          <div class="upload-icon">🖼️</div>
+          <h3>Drop images here or click to browse</h3>
+          <p>Supports JPG, PNG, WebP. You can select multiple images at once.</p>
+        </div>
+
+        <div id="imageList" class="image-list"></div>
+        <p class="image-count" id="imageCount">No images selected</p>
+
+        <div style="margin-top:15px;text-align:center;">
+          <button class="btn btn-primary" id="convertBtn" disabled>Create PDF</button>
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+          <p class="progress-text" id="progressText">Processing...</p>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+          <div class="result-icon">✅</div>
+          <h3>PDF Created!</h3>
+          <p>Your PDF with <span id="pageCount">0</span> pages is ready.</p>
+          <a class="btn btn-success" id="downloadBtn" download="images.pdf">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 ToolLabs — Free Image to PDF Converter. Your privacy is guaranteed.</p>
+      <nav><a href="/">Home</a> &middot; <a href="/image-to-pdf">Image to PDF</a></nav>
+    </div>
+  </footer>
+
+  <script src="/lib/pdf-lib.min.js"></script>
+  <script src="/js/image-to-pdf.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF Compressor – Reduce PDF File Size Online | ToolLabs</title>
+  <meta name="description" content="Compress PDF files online for free. Reduce PDF file size while maintaining quality. All processing in your browser — no uploads.">
+  <meta name="keywords" content="compress PDF, reduce PDF size, PDF compressor, shrink PDF, online PDF compressor">
+  <link rel="canonical" href="https://toollabs-phi.vercel.app/compress-pdf">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">ToolLabs <span class="logo-tag">Free Online Tools</span></a>
+      <p class="tagline">100% free. No uploads. All processing happens in your browser.</p>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <h1>Compress PDF</h1>
+        <p>Reduce PDF file size while keeping good quality. Select a compression level and let your browser do the work. No uploads, no limits.</p>
+      </div>
+
+      <div class="tool-container">
+        <div id="statusMsg" style="display:none;padding:12px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:14px;font-weight:600;"></div>
+
+        <div class="upload-area" id="dropZone">
+          <div class="upload-icon">📦</div>
+          <h3>Drop a PDF here or click to browse</h3>
+          <p>Maximum file size: 100MB. All processing in your browser.</p>
+        </div>
+
+        <div class="file-info" id="fileInfo">
+          <span>📄</span>
+          <span class="file-name" id="fileName">document.pdf</span>
+          <span class="file-size" id="fileSize">0 KB</span>
+        </div>
+
+        <div style="margin-top:15px;">
+          <label style="font-size:14px;font-weight:500;">Compression level:</label>
+          <select id="compressLevel" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;margin-top:5px;font-size:14px;">
+            <option value="high">Maximum compression (smallest size, may affect quality)</option>
+            <option value="medium" selected>Balanced (good compression, good quality)</option>
+            <option value="low">Light compression (minimal size reduction)</option>
+          </select>
+        </div>
+
+        <div style="margin-top:15px;text-align:center;">
+          <button class="btn btn-primary" id="compressBtn" disabled>Compress PDF</button>
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+          <p class="progress-text" id="progressText">Processing...</p>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+          <div class="result-icon">✅</div>
+          <h3>Compression Complete!</h3>
+          <p id="compressResultText">Reduced from 0 KB to 0 KB (0% reduction)</p>
+          <a class="btn btn-success" id="downloadBtn" download="compressed.pdf">Download Compressed PDF</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 ToolLabs — Free PDF Compressor. Your privacy is guaranteed.</p>
+      <nav><a href="/">Home</a> &middot; <a href="/compress-pdf">Compress PDF</a></nav>
+    </div>
+  </footer>
+
+  <script src="/lib/pdf-lib.min.js"></script>
+  <script src="/js/compress-pdf.js"></script>
+</body>
+</html>

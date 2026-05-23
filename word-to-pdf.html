@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Word to PDF Converter – DOCX to PDF Online | ToolLabs</title>
+  <meta name="description" content="Convert Word documents (DOCX) to PDF for free. All processing in your browser — no uploads, no sign-ups.">
+  <meta name="keywords" content="Word to PDF, DOCX to PDF, convert Word to PDF, free Word to PDF converter">
+  <link rel="canonical" href="https://toollabs-phi.vercel.app/word-to-pdf">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .word-preview { width: 100%; min-height: 200px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; margin-top: 15px; display: none; background: white; font-size: 14px; line-height: 1.6; }
+    .word-preview.show { display: block; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">ToolLabs <span class="logo-tag">Free Online Tools</span></a>
+      <p class="tagline">100% free. No uploads. All processing happens in your browser.</p>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="container">
+      <div class="tool-header">
+        <h1>Word to PDF Converter</h1>
+        <p>Convert Word documents (.docx) to PDF format. Your document never leaves your device.</p>
+      </div>
+
+      <div class="tool-container">
+        <div id="statusMsg" style="display:none;padding:12px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:14px;font-weight:600;"></div>
+
+        <div class="upload-area" id="dropZone">
+          <div class="upload-icon">📄</div>
+          <h3>Drop a Word document here or click to browse</h3>
+          <p>Supports .docx files. Max 50MB.</p>
+        </div>
+
+        <div class="file-info" id="fileInfo">
+          <span>📄</span>
+          <span class="file-name" id="fileName">document.docx</span>
+          <span class="file-size" id="fileSize">0 KB</span>
+        </div>
+
+        <div style="margin-top:15px;text-align:center;">
+          <button class="btn btn-primary" id="convertBtn" disabled>Convert to PDF</button>
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+          <p class="progress-text" id="progressText">Processing...</p>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+          <div class="result-icon">✅</div>
+          <h3>Conversion Complete!</h3>
+          <p>Your PDF is ready to download.</p>
+          <a class="btn btn-success" id="downloadBtn" download="document.pdf">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 ToolLabs — Free Word to PDF Converter. Your privacy is guaranteed.</p>
+      <nav><a href="/">Home</a> &middot; <a href="/word-to-pdf">Word to PDF</a></nav>
+    </div>
+  </footer>
+
+  <script src="/lib/mammoth.min.js"></script>
+  <script src="/lib/pdf-lib.min.js"></script>
+  <script src="/js/word-to-pdf.js"></script>
+</body>
+</html>
