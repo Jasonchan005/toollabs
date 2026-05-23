@@ -14,6 +14,7 @@
   var statusMsg = document.getElementById('statusMsg');
 
   var selectedFile = null;
+  var customFontLoaded = false;
 
   function showStatus(msg, isErr) { statusMsg.style.display = 'block'; statusMsg.style.background = isErr ? '#fee2e2' : '#dbeafe'; statusMsg.style.color = isErr ? '#b91c1c' : '#1e40af'; statusMsg.textContent = msg; }
   function hideStatus() { statusMsg.style.display = 'none'; }
@@ -49,87 +50,75 @@
     progressBarFill.style.width = '0%'; progressText.textContent = 'Reading Word document...';
 
     try {
-      // Register fontkit for custom font embedding
-      PDFLib.PDFDocument.registerFontkit(fontkit);
-
-      // Load Chinese font
-      progressText.textContent = 'Loading Chinese font...';
-      var fontResponse = await fetch('/lib/NotoSansSC.otf');
-      var fontBytes = await fontResponse.arrayBuffer();
-      progressBarFill.style.width = '15%';
-
       var arrayBuffer = await selectedFile.arrayBuffer();
-      progressBarFill.style.width = '30%';
-      progressText.textContent = 'Converting to PDF...';
+      progressBarFill.style.width = '20%';
 
       // Convert DOCX to HTML using mammoth
+      progressText.textContent = 'Parsing document...';
       var result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
       var html = result.value;
+
+      // Extract text
+      var tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      var paragraphs = tempDiv.textContent.split('\n').filter(function(p) { return p.trim(); });
+
+      progressBarFill.style.width = '40%';
+      progressText.textContent = 'Loading font...';
+
+      // Load Chinese font
+      var fontResp = await fetch('/lib/NotoSansSC.otf');
+      var fontBuffer = await fontResp.arrayBuffer();
 
       progressBarFill.style.width = '60%';
       progressText.textContent = 'Generating PDF...';
 
-      // Create PDF with pdf-lib
-      var pdfDoc = await PDFLib.PDFDocument.create();
-      var font = await pdfDoc.embedFont(fontBytes);
-      var fontSize = 11;
-      var pageWidth = 595; // A4
-      var pageHeight = 842;
+      // Create PDF with jsPDF
+      var doc = new jspdf.jsPDF({ orientation: 'p', unit: 'pt', format: 'a4' });
+      doc.addFileToVFS('NotoSansSC.otf', btoa(String.fromCharCode.apply(null, new Uint8Array(fontBuffer))));
+      doc.addFont('NotoSansSC.otf', 'NotoSansSC', 'normal');
+      doc.setFont('NotoSansSC');
+
+      var pageW = doc.internal.pageSize.getWidth();
       var margin = 50;
-      var maxWidth = pageWidth - margin * 2;
-      var lineHeight = fontSize * 1.5;
+      var maxW = pageW - margin * 2;
+      var y = 60;
+      var lineH = 18;
+      var fontSize = 11;
 
-      // Parse HTML text content
-      var tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
-      var text = tempDiv.textContent || '';
-      var paragraphs = text.split('\n').filter(function(p) { return p.trim(); });
-
-      var page = pdfDoc.addPage([pageWidth, pageHeight]);
-      var y = pageHeight - margin;
+      doc.setFontSize(fontSize);
 
       for (var i = 0; i < paragraphs.length; i++) {
-        var para = paragraphs[i].trim();
-        if (!para) continue;
+        var text = paragraphs[i].trim();
+        if (!text) { y += lineH / 2; continue; }
 
-        // Word wrap
-        var words = para.split(' ');
-        var line = '';
-
-        for (var w = 0; w < words.length; w++) {
-          var testLine = line + (line ? ' ' : '') + words[w];
-          var tw = font.widthOfTextAtSize(testLine, fontSize);
-          if (tw > maxWidth && line) {
-            // Check if we need a new page
-            if (y < margin + lineHeight) {
-              page = pdfDoc.addPage([pageWidth, pageHeight]);
-              y = pageHeight - margin;
-            }
-            page.drawText(line, { x: margin, y: y, size: fontSize, font: font });
-            y -= lineHeight;
-            line = words[w];
-          } else {
-            line = testLine;
-          }
+        // Check if we need a new page
+        if (y > 780) {
+          doc.addPage();
+          y = 60;
         }
 
-        if (line) {
-          if (y < margin + lineHeight) {
-            page = pdfDoc.addPage([pageWidth, pageHeight]);
-            y = pageHeight - margin;
+        // Detect headings
+        var isHeading = text.length < 60 && text.length > 5 && !/[.!?:，。？]$/.test(text);
+        if (isHeading) {
+          doc.setFontSize(14);
+          doc.setFont('NotoSansSC', 'bold');
+          doc.text(text, margin, y, { maxWidth: maxW });
+          doc.setFont('NotoSansSC', 'normal');
+          doc.setFontSize(fontSize);
+          y += lineH + 8;
+        } else {
+          var lines = doc.splitTextToSize(text, maxW);
+          for (var li = 0; li < lines.length; li++) {
+            if (y > 780) { doc.addPage(); y = 60; }
+            doc.text(lines[li], margin, y);
+            y += lineH;
           }
-          // Try to detect headings (short lines)
-          var isBold = para.length < 60 && para.length > 5 && !/[.!?:]$/.test(para);
-          page.drawText(line, { x: margin, y: y, size: isBold ? 14 : fontSize, font: font });
-          y -= lineHeight + (isBold ? 6 : 0);
         }
       }
 
-      progressBarFill.style.width = '90%';
-
-      var pdfBytes = await pdfDoc.save();
-      var blob = new Blob([pdfBytes], { type: 'application/pdf' });
-      var url = URL.createObjectURL(blob);
+      var pdfBlob = doc.output('blob');
+      var url = URL.createObjectURL(pdfBlob);
       downloadBtn.href = url;
       downloadBtn.download = selectedFile.name.replace(/\.docx$/i, '') + '.pdf';
 
