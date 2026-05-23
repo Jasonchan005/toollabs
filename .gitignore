@@ -1,2 +1,5 @@
 # WorkBuddy memory
 .workbuddy/memory/
+
+# Private credentials
+.private/

@@ -1,0 +1,91 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "ToolLabs Free Online Tools" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: ToolLabs
+        - generic [ref=e5]: Free Online Tools
+      - paragraph [ref=e6]: 100% free. No uploads. All processing happens in your browser.
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - heading "Free Online Tools — Browser-Based, No Server Uploads" [level=1] [ref=e9]
+      - paragraph [ref=e10]:
+        - text: Every tool runs entirely in your browser. Your files never leave your device.
+        - strong [ref=e11]: No sign-ups, no limits, 100% free.
+    - generic [ref=e12]:
+      - heading "📄 Document Tools" [level=2] [ref=e13]
+      - generic [ref=e14]:
+        - link "📝 PDF to Word Convert PDF files to editable Word documents. Preserves text layout. Popular" [ref=e15] [cursor=pointer]:
+          - /url: /pdf-to-word
+          - generic [ref=e16]: 📝
+          - heading "PDF to Word" [level=3] [ref=e17]
+          - paragraph [ref=e18]: Convert PDF files to editable Word documents. Preserves text layout.
+          - generic [ref=e19]: Popular
+        - link "🔗 Merge PDF (Coming Soon) Combine multiple PDF files into one document." [ref=e20]:
+          - /url: "#"
+          - generic [ref=e21]: 🔗
+          - heading "Merge PDF (Coming Soon)" [level=3] [ref=e22]
+          - paragraph [ref=e23]: Combine multiple PDF files into one document.
+        - link "📎 Image to PDF (Coming Soon) Convert JPG, PNG images to PDF files." [ref=e24]:
+          - /url: "#"
+          - generic [ref=e25]: 📎
+          - heading "Image to PDF (Coming Soon)" [level=3] [ref=e26]
+          - paragraph [ref=e27]: Convert JPG, PNG images to PDF files.
+      - heading "🖼️ Image Tools" [level=2] [ref=e28]
+      - generic [ref=e29]:
+        - link "📦 Compress Image (Coming Soon) Reduce image file size without losing quality." [ref=e30]:
+          - /url: "#"
+          - generic [ref=e31]: 📦
+          - heading "Compress Image (Coming Soon)" [level=3] [ref=e32]
+          - paragraph [ref=e33]: Reduce image file size without losing quality.
+        - link "🔄 HEIC to JPG (Coming Soon) Convert HEIC/HEIF photos to widely compatible JPG format." [ref=e34]:
+          - /url: "#"
+          - generic [ref=e35]: 🔄
+          - heading "HEIC to JPG (Coming Soon)" [level=3] [ref=e36]
+          - paragraph [ref=e37]: Convert HEIC/HEIF photos to widely compatible JPG format.
+        - link "✂️ Image Resizer (Coming Soon) Resize images to any dimensions." [ref=e38]:
+          - /url: "#"
+          - generic [ref=e39]: ✂️
+          - heading "Image Resizer (Coming Soon)" [level=3] [ref=e40]
+          - paragraph [ref=e41]: Resize images to any dimensions.
+      - heading "🧮 Calculator & Utility Tools" [level=2] [ref=e42]
+      - generic [ref=e43]:
+        - link "📊 BMI Calculator (Coming Soon) Calculate your Body Mass Index instantly." [ref=e44]:
+          - /url: "#"
+          - generic [ref=e45]: 📊
+          - heading "BMI Calculator (Coming Soon)" [level=3] [ref=e46]
+          - paragraph [ref=e47]: Calculate your Body Mass Index instantly.
+        - link "📋 JSON Formatter (Coming Soon) Format, validate, and beautify JSON data." [ref=e48]:
+          - /url: "#"
+          - generic [ref=e49]: 📋
+          - heading "JSON Formatter (Coming Soon)" [level=3] [ref=e50]
+          - paragraph [ref=e51]: Format, validate, and beautify JSON data.
+        - link "🏠 Mortgage Calculator (Coming Soon) Estimate monthly mortgage payments." [ref=e52]:
+          - /url: "#"
+          - generic [ref=e53]: 🏠
+          - heading "Mortgage Calculator (Coming Soon)" [level=3] [ref=e54]
+          - paragraph [ref=e55]: Estimate monthly mortgage payments.
+    - generic [ref=e56]:
+      - heading "Why Use ToolLabs?" [level=2] [ref=e57]
+      - list [ref=e58]:
+        - listitem [ref=e59]:
+          - strong [ref=e60]: "Privacy First:"
+          - text: All files are processed in your browser. Nothing is uploaded to any server.
+        - listitem [ref=e61]:
+          - strong [ref=e62]: "100% Free:"
+          - text: No hidden charges, no premium plans, no usage limits.
+        - listitem [ref=e63]:
+          - strong [ref=e64]: "No Sign-ups:"
+          - text: Use any tool instantly without creating an account.
+        - listitem [ref=e65]:
+          - strong [ref=e66]: "Works Everywhere:"
+          - text: Compatible with Chrome, Edge, Firefox, and Safari on desktop and mobile.
+  - contentinfo [ref=e67]:
+    - generic [ref=e68]:
+      - paragraph [ref=e69]: © 2026 ToolLabs. All tools are 100% free. Your privacy is guaranteed — no server uploads.
+      - navigation [ref=e70]:
+        - link "Home" [ref=e71] [cursor=pointer]:
+          - /url: /
+        - text: ·
+        - link "PDF to Word" [ref=e72] [cursor=pointer]:
+          - /url: /pdf-to-word
