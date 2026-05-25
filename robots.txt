@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://toollabs-phi.vercel.app/sitemap.xml
