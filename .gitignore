@@ -4,3 +4,6 @@
 # Private credentials
 .private/
 .playwright-cli/
+free-translator/
+free-translator-extension/
+image-toollab/
