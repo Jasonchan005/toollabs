@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  // GA event helper
+  function trackEvent(action, params) {
+    if (typeof gtag === 'function') gtag('event', action, params || {});
+  }
+
   var dropZone = document.getElementById('dropZone');
   var imageList = document.getElementById('imageList');
   var imageCount = document.getElementById('imageCount');
@@ -45,6 +50,7 @@
       hideStatus();
     }
     updateUI();
+    trackEvent('files_selected', { tool: 'image_to_pdf', file_count: selectedFiles.length, total_size: selectedFiles.reduce(function(s,f){return s+f.size},0) });
   }
 
   dropZone.addEventListener('click', function() {
@@ -62,7 +68,7 @@
 
   convertBtn.addEventListener('click', async function() {
     if (selectedFiles.length === 0) return;
-
+    trackEvent('convert_start', { tool: 'image_to_pdf', file_count: selectedFiles.length });
     convertBtn.disabled = true;
     progressContainer.classList.add('show'); resultContainer.classList.remove('show');
     progressBarFill.style.width = '0%'; progressText.textContent = 'Creating PDF...';
@@ -113,9 +119,11 @@
       progressBarFill.style.width = '100%';
       progressText.textContent = 'Done!';
       setTimeout(function() { progressContainer.classList.remove('show'); resultContainer.classList.add('show'); }, 500);
+      trackEvent('convert_success', { tool: 'image_to_pdf', file_count: total });
 
     } catch (err) {
       showStatus('Error: ' + (err.message || 'Failed to create PDF'), true);
+      trackEvent('convert_fail', { tool: 'image_to_pdf', error: (err.message || '').substring(0, 100) });
       progressContainer.classList.remove('show'); convertBtn.disabled = false;
     }
   });

@@ -8,6 +8,10 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-503ZSLGF0W');
+
+    function trackEvent(action, params) {
+      if (typeof gtag === 'function') gtag('event', action, params || {});
+    }
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -414,6 +418,7 @@
         return;
       }
 
+      trackEvent('watermark_start', { tool: 'add_watermark', file_type: currentFileType });
       try {
         if (currentFileType === 'pdf') {
           await applyPdfWatermark();
@@ -490,6 +495,7 @@
 
       showStatus('✅ Watermark added! ' + pages.length + ' page(s) processed.', 'success');
       document.getElementById('downloadBtn').style.display = 'inline-block';
+      trackEvent('watermark_success', { tool: 'add_watermark', file_type: 'pdf', page_count: pages.length });
     }
 
     function applyImageWatermark() {
@@ -497,6 +503,7 @@
       processedDataUrl = canvas.toDataURL(currentFile.type || 'image/png');
       showStatus('✅ Watermark applied to image!', 'success');
       document.getElementById('downloadBtn').style.display = 'inline-block';
+      trackEvent('watermark_success', { tool: 'add_watermark', file_type: 'image' });
     }
 
     function downloadResult() {

@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  // GA event helper
+  function trackEvent(action, params) {
+    if (typeof gtag === 'function') gtag('event', action, params || {});
+  }
+
   var dropZone = document.getElementById('dropZone');
   var imagePreview = document.getElementById('imagePreview');
   var langSelect = document.getElementById('langSelect');
@@ -45,6 +50,7 @@
       imagePreview.classList.add('show');
     };
     reader.readAsDataURL(file);
+    trackEvent('file_selected', { tool: 'image_to_text', file_size: file.size, lang: langSelect.value });
   }
 
   // === Click to upload ===
@@ -173,6 +179,7 @@
       return;
     }
 
+    trackEvent('ocr_start', { tool: 'image_to_text', lang: langSelect.value });
     extractBtn.disabled = true;
     progressContainer.classList.add('show');
     resultBox.classList.remove('show');
@@ -228,9 +235,11 @@
       setTimeout(function() {
         progressContainer.classList.remove('show');
       }, 500);
+      trackEvent('ocr_success', { tool: 'image_to_text', lang: langSelect.value, text_length: text.length });
 
     } catch (err) {
       showStatus('Error: ' + (err.message || 'OCR failed'), true);
+      trackEvent('ocr_fail', { tool: 'image_to_text', error: (err.message || '').substring(0, 100) });
       progressContainer.classList.remove('show');
       extractBtn.disabled = false;
     }
@@ -243,12 +252,14 @@
     navigator.clipboard.writeText(text).then(function() {
       showStatus('Text copied to clipboard!');
       setTimeout(hideStatus, 2000);
+      trackEvent('ocr_copy', { tool: 'image_to_text' });
     }).catch(function() {
       // Fallback
       resultBox.select();
       document.execCommand('copy');
       showStatus('Text copied!');
       setTimeout(hideStatus, 2000);
+      trackEvent('ocr_copy', { tool: 'image_to_text' });
     });
   };
 

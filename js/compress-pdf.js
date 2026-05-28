@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  // GA event helper
+  function trackEvent(action, params) {
+    if (typeof gtag === 'function') gtag('event', action, params || {});
+  }
+
   var dropZone = document.getElementById('dropZone');
   var fileInfo = document.getElementById('fileInfo');
   var fileName = document.getElementById('fileName');
@@ -43,6 +48,7 @@
     compressBtn.disabled = false;
     hideStatus();
     resultContainer.classList.remove('show');
+    trackEvent('file_selected', { tool: 'compress_pdf', file_size: file.size });
   }
 
   dropZone.addEventListener('click', function() {
@@ -118,7 +124,7 @@
   // === Compress Button ===
   compressBtn.addEventListener('click', async function() {
     if (!selectedFile) return;
-
+    trackEvent('compress_start', { tool: 'compress_pdf', file_size: selectedFile.size, level: compressLevel.value });
     compressBtn.disabled = true;
     progressContainer.classList.add('show');
     resultContainer.classList.remove('show');
@@ -149,9 +155,11 @@
       progressBarFill.style.width = '100%';
       progressText.textContent = 'Done!';
       setTimeout(function() { progressContainer.classList.remove('show'); resultContainer.classList.add('show'); }, 500);
+      trackEvent('compress_success', { tool: 'compress_pdf', original_size: originalSize, compressed_size: compressedSize, savings: savings });
 
     } catch (err) {
       showStatus('Error: ' + (err.message || 'Compression failed'), true);
+      trackEvent('compress_fail', { tool: 'compress_pdf', error: (err.message || '').substring(0, 100) });
       progressContainer.classList.remove('show');
       compressBtn.disabled = false;
     }

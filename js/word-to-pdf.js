@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  // GA event helper
+  function trackEvent(action, params) {
+    if (typeof gtag === 'function') gtag('event', action, params || {});
+  }
+
   var dropZone = document.getElementById('dropZone');
   var fileInfo = document.getElementById('fileInfo');
   var fileName = document.getElementById('fileName');
@@ -27,6 +32,7 @@
     fileName.textContent = file.name;
     fileSize.textContent = formatSize(file.size);
     fileInfo.classList.add('show'); dropZone.style.display = 'none'; convertBtn.disabled = false; hideStatus(); resultContainer.classList.remove('show');
+    trackEvent('file_selected', { tool: 'word_to_pdf', file_size: file.size });
   }
 
   dropZone.addEventListener('click', function() {
@@ -44,7 +50,7 @@
 
   convertBtn.addEventListener('click', async function() {
     if (!selectedFile) return;
-
+    trackEvent('convert_start', { tool: 'word_to_pdf', file_size: selectedFile.size });
     convertBtn.disabled = true;
     progressContainer.classList.add('show'); resultContainer.classList.remove('show');
     progressBarFill.style.width = '0%'; progressText.textContent = 'Reading Word document...';
@@ -125,9 +131,11 @@
       progressBarFill.style.width = '100%';
       progressText.textContent = 'Done!';
       setTimeout(function() { progressContainer.classList.remove('show'); resultContainer.classList.add('show'); }, 500);
+      trackEvent('convert_success', { tool: 'word_to_pdf', file_size: selectedFile.size });
 
     } catch (err) {
       showStatus('Error: ' + (err.message || 'Conversion failed'), true);
+      trackEvent('convert_fail', { tool: 'word_to_pdf', error: (err.message || '').substring(0, 100) });
       progressContainer.classList.remove('show'); convertBtn.disabled = false;
     }
   });

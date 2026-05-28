@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  // GA event helper
+  function trackEvent(action, params) {
+    if (typeof gtag === 'function') gtag('event', action, params || {});
+  }
+
   var dropZone = document.getElementById('dropZone');
   var fileInfo = document.getElementById('fileInfo');
   var fileName = document.getElementById('fileName');
@@ -88,6 +93,7 @@
     selectedFile = file;
     showFileInfo(file);
     resultContainer.classList.remove('show');
+    trackEvent('file_selected', { tool: 'pdf_to_word', file_size: file.size });
   }
 
   // === Convert ===
@@ -98,6 +104,7 @@
       return;
     }
 
+    trackEvent('convert_start', { tool: 'pdf_to_word', file_size: selectedFile.size });
     convertBtn.disabled = true;
     progressContainer.classList.add('show');
     resultContainer.classList.remove('show');
@@ -146,16 +153,18 @@
       downloadBtn.href = url;
       downloadBtn.download = filename;
 
-      setTimeout(function() {
-        progressContainer.classList.remove('show');
-        resultContainer.classList.add('show');
-      }, 500);
+        setTimeout(function() {
+          progressContainer.classList.remove('show');
+          resultContainer.classList.add('show');
+          trackEvent('convert_success', { tool: 'pdf_to_word', file_size: selectedFile.size });
+        }, 500);
 
-    } catch (err) {
-      showStatus('Error: ' + (err.message || 'Conversion failed'), true);
-      progressContainer.classList.remove('show');
-      convertBtn.disabled = false;
-    }
+      } catch (err) {
+        showStatus('Error: ' + (err.message || 'Conversion failed'), true);
+        trackEvent('convert_fail', { tool: 'pdf_to_word', error: (err.message || '').substring(0, 100) });
+        progressContainer.classList.remove('show');
+        convertBtn.disabled = false;
+      }
   });
 
 })();
