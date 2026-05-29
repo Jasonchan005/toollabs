@@ -76,12 +76,22 @@
       var fontResp = await fetch('/lib/NotoSansSC.otf');
       var fontBuffer = await fontResp.arrayBuffer();
 
+      // Convert font to base64 (avoid call stack issue with large files)
+      var fontBytes = new Uint8Array(fontBuffer);
+      var binary = '';
+      var chunkSize = 8192;
+      for (var fi = 0; fi < fontBytes.length; fi += chunkSize) {
+        var chunk = fontBytes.subarray(fi, Math.min(fi + chunkSize, fontBytes.length));
+        binary += String.fromCharCode.apply(null, chunk);
+      }
+      var fontBase64 = btoa(binary);
+
       progressBarFill.style.width = '60%';
       progressText.textContent = 'Generating PDF...';
 
       // Create PDF with jsPDF
       var doc = new jspdf.jsPDF({ orientation: 'p', unit: 'pt', format: 'a4' });
-      doc.addFileToVFS('NotoSansSC.otf', btoa(String.fromCharCode.apply(null, new Uint8Array(fontBuffer))));
+      doc.addFileToVFS('NotoSansSC.otf', fontBase64);
       doc.addFont('NotoSansSC.otf', 'NotoSansSC', 'normal');
       doc.setFont('NotoSansSC');
 
