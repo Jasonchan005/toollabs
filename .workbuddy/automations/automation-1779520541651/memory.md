@@ -65,7 +65,25 @@
   - `.private/project-backup.md`（更新日期，补充 2026-05-28 条目）
 - 结论：✅ 备份完成，项目状态健康，无新功能上线
 
-## 2026-05-27 15:00 — 第六次执行
+## 2026-05-30 02:00 — 第八次执行
+- Git 状态：多个新站点已开发但未暂存（galaxymind、predictor、citation-gen/typing-test/vocab-test/math-practice 子模块指针更新）
+- 操作：
+  - `git add` 所有新内容（包含 package.json、测试脚本、删除的 test-files）
+  - 发现 package.json 含 GitHub Token → push protection 拦截 ❌
+  - 修改 package.json 去除 token → `git commit --amend` → `git push --force-with-lease` ✅
+  - 39 commits 全部同步 GitHub
+- 新增内容：
+  - `galaxymind/`（Mind-Galaxy 3D知识图谱，mind-galaxy.vercel.app）
+  - `predictor/`（AI情景预测站，待部署）
+  - `knowledge-graph-3d.html`、`package.json`、测试脚本
+  - 子模块指针更新：citation-gen / typing-test / vocab-test / math-practice
+- 删除：`test-files/` 目录
+- 更新文件：
+  - `.workbuddy/memory/2026-05-30.md`（新建当日日志）
+  - `.workbuddy/memory/MEMORY.md`（更新站点矩阵至11个，commits 35→39）
+  - `.private/project-backup.md`（更新日期、文件结构、开发记录、子项目清单）
+- 踩坑：package.json repository.url 含 Token，被 GitHub push protection 拦截；修复方式：去 token + amend + force push
+- 结论：✅ 备份完成，39 commits 已同步 GitHub
 - Git 状态：工作树干净，35 commits，无新代码变更
 - 操作：无需 git add/commit/push（无变更）
 - 文件变更：无
