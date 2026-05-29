@@ -1,0 +1,30 @@
+{
+  "name": "2026-05-16-task-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test-all-sites.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasonchan005/toollabs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jasonchan005/toollabs/issues"
+  },
+  "homepage": "https://github.com/Jasonchan005/toollabs#readme",
+  "dependencies": {
+    "canvas": "^3.2.3",
+    "docx": "^9.7.1",
+    "jspdf": "^4.2.1",
+    "playwright": "^1.60.0"
+  }
+}
