@@ -7,3 +7,11 @@
 free-translator/
 free-translator-extension/
 image-toollab/
+
+# Dependencies
+node_modules/
+
+# Temp/generated files
+graph.png
+graph1.png
+test-graph-view.js
