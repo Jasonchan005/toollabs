@@ -414,7 +414,14 @@
 - 未纳入版控（正常）：check.js、screen.png
 - 结论：✅ 备份完成，54 commits 已同步 GitHub，项目状态健康
 
-## 2026-06-24 21:46 — 第四十次执行
+## 2026-06-25 09:59 — 第四十一次执行
+- Git 状态：核心代码无变更；子模块 citation-gen/typing-test/vocab-test 仅 -dirty（vercel.json 本地修改），指针未变；math-practice 有 untracked content
+- 操作：无核心代码变更，无子模块指针变化，跳过 git commit/push
+- 文件变更：仅备份文件更新（2026-06-25.md 新建、MEMORY.md、project-backup.md）
+- 未纳入版控（正常）：check.js、screen.png
+- 更新文件：2026-06-25.md、MEMORY.md、project-backup.md
+- 结论：✅ 备份完成，项目状态健康，55 commits 保持同步
+
 - Git 状态：核心代码无变更；子模块 citation-gen/typing-test/vocab-test 仍为 -dirty（vercel.json 本地修改，typing-test/vocab-test 多了 debug.log untracked），指针未变；math-practice 持续有 untracked content（grade.yaml、practice.yaml）
 - 变更文件：仅 automation memory.md（本次执行更新），无核心代码变更
 - 操作：
@@ -428,3 +435,10 @@
   - `.private/project-backup.md`（更新日期、commits 数、追加第四十次备份记录）
 - 未纳入版控（正常）：check.js、screen.png
 - 结论：✅ 备份完成，55 commits 已同步 GitHub，项目状态健康
+
+## 2026-06-25 22:00 — 第四十二次执行
+- Git 状态：核心代码无变更（index.html、pdf-to-word.html、css/js/lib/ 等均无修改）
+- 子模块：citation-gen 有新 commit（af7c304→939ee06 fix: update domain）；typing-test/vocab-test 仍 dirty（vercel.json 本地修改），指针未变；math-practice 有 untracked content（grade.yaml、practice.yaml）
+- 操作：无核心代码变更，无主仓库子模块指针变化（citation-gen 新 commit 不影响主仓库指针），跳过 git commit/push
+- 文件变更：仅 `.workbuddy/memory/2026-06-25.md`（追加 22:00 记录）、`MEMORY.md`（last_updated→22:00）、`.private/project-backup.md`（追加第四十二次记录）
+- 结论：✅ 备份完成，项目状态健康，55 commits 保持同步
