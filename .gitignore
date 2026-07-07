@@ -15,3 +15,5 @@ node_modules/
 graph.png
 graph1.png
 test-graph-view.js
+outputs/
+
