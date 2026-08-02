@@ -1055,3 +1055,14 @@
 - 更新文件：2026-07-31.md（追加 16:25 备份记录）、MEMORY.md（commits 109→113，last_updated→16:25）、project-backup.md（追加第八十三次记录）、automation memory.md（追加第八十三次记录）
 - 主仓库：113 commits，GitHub 已同步（0 差异）
 - 结论：✅ 备份完成，113 commits 已同步 GitHub，项目状态健康，无核心代码变更
+
+## 2026-08-02 11:18 — 第八十四次执行
+- Git 状态：核心代码无变更（index.html、pdf-to-word.html、compress-pdf.html、word-to-pdf.html、image-to-pdf.html、add-watermark.html、image-to-text.html、knowledge-graph-3d.html、css/style.css、js/*.js、lib/*.js、package.json 自 2026-05-30 起均无修改）
+- 子模块脏状态：citation-gen（modified content）、typing-test（modified content + untracked content）、vocab-test（modified content + untracked content）仅工作树脏（vercel.json 本地修改 + debug.log），指针未变；math-practice（untracked content）yaml 未跟踪
+- gitignored 子项目：free-translator、free-translator-extension、image-toollab 独立仓库无变化
+- 未纳入版控（正常）：check.js、screen.png
+- 变更文件：无核心代码变更，无 automation memory.md 变更（上次备份 2026-07-31 16:25 后无修改）
+- HEAD 与 origin/master 均为 114 commits，完全同步，无需 git add/commit/push
+- 更新文件：2026-08-02.md（新建）、MEMORY.md（last_updated→2026-08-02T11:18）、project-backup.md（追加第八十四次记录）、automation memory.md（追加第八十四次记录）
+- 主仓库：114 commits，GitHub 已同步（0 差异）
+- 结论：✅ 备份完成，114 commits 保持同步，项目状态健康，无核心代码变更
