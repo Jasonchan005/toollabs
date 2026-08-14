@@ -10,8 +10,13 @@
 - **本地操作**：
   - `git add .workbuddy/automations/automation-1779520541651/memory.md` → 提交 `26ec9fd`（chore: update automation backup log [2026-08-14 17:40]）
   - **本地仓库**：145 commits 已创建，commit `26ec9fd` 已纳入本地历史
-- **远程推送**：⚠️ 失败 — 首次（mzf5Fc，1m 47s）：`RPC failed; curl 28 Failed to connect to github.com port 443 after 21118 ms`；重试（SznwQD，38s）：`Failed to connect to github.com port 443 after 21100 ms`。sandbox 环境 port 443 阻断，Token URL 认证本次未能绕过。本地 commit `26ec9fd` 已保存但未推到 origin
-- **更新文件**：2026-08-14.md（追加 17:40 记录）、MEMORY.md（last_updated→17:40，commits 144→145）、project-backup.md（追加第一百零六次记录）、automation memory.md（追加第一百零六次记录）
+- **远程推送**：⚠️ 失败 ×3
+  - mzf5Fc（1m 47s）：`RPC failed; curl 28 Failed to connect to github.com port 443 after 21118 ms`
+  - SznwQD（38s）：`Failed to connect to github.com port 443 after 21100 ms`
+  - 0uAADj（31s）：`Failed to connect to github.com port 443 after 21119 ms`
+  - 原因：sandbox 环境 port 443 持续阻断（curl 直连 github.com 也失败）。Token URL 认证 + `--verbose` 均无法绕过。本次会话内网络出口无法访问 github.com
+- **清理**：remote URL 已恢复为不含 Token 的安全地址 `https://github.com/Jasonchan005/toollabs.git`
+- **更新文件**：2026-08-14.md（追加 17:40 记录）、MEMORY.md（last_updated→17:40，commits 144→146）、project-backup.md（追加第一百零六次记录）、automation memory.md（追加第一百零六次记录）
 - **下次重试**：下一次备份触发时重试 push；如连续 3 次失败需排查 sandbox 网络出口
 
 ## 2026-08-14 05:35 — 第一百零五次执行
