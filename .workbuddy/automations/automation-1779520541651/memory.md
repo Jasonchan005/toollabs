@@ -1,27 +1,28 @@
 # 自动备份任务执行历史
 
-## 2026-08-14 17:40 — 第一百零六次执行
+## 2026-08-14 17:58 — 第一百零六次执行（完成）
 - **Git 状态**：核心代码无变更（index.html、pdf-to-word.html、compress-pdf.html、word-to-pdf.html、image-to-pdf.html、add-watermark.html、image-to-text.html、knowledge-graph-3d.html、css/style.css、js/*.js、lib/*.js、package.json 自 2026-05-22~05-29 起均无修改）
 - **子模块脏状态**：citation-gen（modified content → vercel.json 本地修改）、typing-test/vocab-test（modified → vercel.json + untracked → debug.log），指针均未变；math-practice（untracked → yaml）
 - **子模块 HEAD**：citation-gen → 939ee06 / typing-test → f742855 / vocab-test → b4a8c49 / math-practice → 123df1f
 - **gitignored 子项目**：free-translator、free-translator-extension、image-toollab 独立仓库无变化
 - **未纳入版控（正常）**：check.js、screen.png
-- **变更文件**：仅 `.workbuddy/automations/automation-1779520541651/memory.md`（+7 行），无核心代码变更
+- **变更文件**：仅 `.workbuddy/automations/automation-1779520541651/memory.md`（多次迭代：+7 → +11 → +14 行），无核心代码变更
 - **本地操作**：
-  - `git add .workbuddy/automations/automation-1779520541651/memory.md` → 提交 `26ec9fd` / `188b5e2` / `4b09d37`
-  - **本地仓库**：147 commits 已纳入本地历史（HEAD=4b09d37）
-- **远程推送**：⚠️ 失败 ×5（sandbox 网络不稳定，Token URL 已正确配置）
+  - `git add .workbuddy/automations/automation-1779520541651/memory.md` → 提交 4 次：`26ec9fd` / `188b5e2` / `4b09d37` / `9bd93d3`
+  - **本地仓库**：148 commits 已纳入本地历史（HEAD=9bd93d3）
+- **远程推送**：⚠️ 失败 ×5 → ✅ 第 6 次成功
   - mzf5Fc（1m 47s）：`RPC failed; curl 28 Failed to connect to github.com port 443 after 21118 ms`
   - SznwQD（38s）：`Failed to connect to github.com port 443 after 21100 ms`
   - 0uAADj（31s）：`Failed to connect to github.com port 443 after 21119 ms`
-  - KgPpKu（38s）：`Failed to connect to github.com port 443 after 21100 ms` → 切换重试：54s 一次 `Recv failure: Connection was reset`
-  - YhxG9u（52s）：`fatal: Authentication failed for 'https://github.com/Jasonchan005/toollabs.git/'`（已用 `curl -H "Authorization: token ..."` 验证 token 有效 → login=Jasonchan005 200 OK，疑为连接层干扰）
+  - KgPpKu（54s 后 partial）：`Recv failure: Connection was reset`
+  - YhxG9u（52s）：`fatal: Authentication failed`（已用 `curl -H "Authorization: token ..."` 验证 token 有效 → 200 OK login=Jasonchan005，连接层干扰）
   - h5JdkV（28s）：`Failed to connect to github.com port 443 after 21050 ms`
-  - 原因：sandbox 环境 port 443 出口极不稳定（偶发 connection reset / connection timeout / auth fail），Token 本身有效但 curl / git 出口在端口层受干扰
-- **未推送 commits**：3 个本地提交（`26ec9fd` / `188b5e2` / `4b09d37`）等待推送
-- **清理**：remote URL 已恢复为不含 Token 的安全地址 `https://github.com/Jasonchan005/toollabs.git`（local commits 不会被自动 token 推送污染）
-- **更新文件**：2026-08-14.md（追加 17:40 记录）、MEMORY.md（last_updated→17:40，commits 144→147）、project-backup.md（追加第一百零六次记录）、automation memory.md（追加第一百零六次记录）
-- **下次重试**：下一次备份触发时再次重试 push；如连续失败需排查 sandbox 网络出口（APNetwork SOCKS5 10807 / 27580 是否临时干扰）
+  - **mjjOQl（23s）→ ✅ `da3fff7..9bd93d3 master -> master` 推送 4 commits 成功**
+  - 原因：sandbox 网络出口对 github.com:443 极不稳定（connection reset / timeout / auth fail 随机），持续重试通常第 3~6 次能成功
+- **清理**：remote URL 已恢复为不含 Token 的安全地址 `https://github.com/Jasonchan005/toollabs.git`
+- **更新文件**：2026-08-14.md（追加 17:58 记录）、MEMORY.md（last_updated→17:58，commits 144→148）、project-backup.md（追加第一百零六次记录）、automation memory.md（追加第一百零六次记录）
+- **主仓库**：148 commits 本地 / 148 commits GitHub（0 差异，HEAD=9bd93d3）
+- **结论**：✅ 项目完整备份完成，GitHub 已同步
 
 ## 2026-08-14 05:35 — 第一百零五次执行
 - **Git 状态**：核心代码无变更（index.html、pdf-to-word.html、compress-pdf.html、word-to-pdf.html、image-to-pdf.html、add-watermark.html、image-to-text.html、knowledge-graph-3d.html、css/style.css、js/*.js、lib/*.js、package.json 自 2026-05-22~05-29 起均无修改）
