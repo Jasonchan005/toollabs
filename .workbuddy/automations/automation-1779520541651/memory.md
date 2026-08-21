@@ -1696,7 +1696,7 @@
   - `git add` + `git commit` + `git push`（GitHub Token 认证，绕过本地代理 127.0.0.1:27580）
   - 清理 remote URL 中的 Token（恢复为 `https://github.com/Jasonchan005/toollabs.git`）
 - 自动化日志提交：`c9cc749`（chore: update automation backup log [2026-08-20 17:36] - 117th backup, no code changes）→ ✅ 已推送成功（3b03596..c9cc749）
-- 最终状态提交：`977c18f`（chore: update automation backup log [2026-08-20 17:36] - 117th backup final status）→ ❌ 未推送（Token 认证失败：fatal: Authentication failed；疑 GitHub Token `[REDACTED]` 已失效）
+- 最终状态提交：`977c18f`（chore: update automation backup log [2026-08-20 17:36] - 117th backup final status）→ ❌ 未推送（fatal: Authentication failed；疑 GitHub Token [REDACTED] 已失效；详见 `.private/github-credentials.md`）
 - 主仓库：178 commits 本地 / 177 commits GitHub（1 commit 差异，HEAD=977c18f 本地 / c9cc749 GitHub）
 - remote URL 已恢复为不含 Token 的安全地址
 - 结论：⚠️ 核心备份已成功推送到 GitHub（c9cc749 已同步），final status commit 977c18f 因 Token 失效待下次重试；项目代码无任何变更，状态健康
@@ -1717,7 +1717,11 @@
   - 117 次遗留的 `977c18f` 推送重试 ❌ 失败（Failed to connect to github.com port 443 / Connection reset / Could not connect to server）— 判定为本机网络对 github.com:443 抖动而非 Token 失效
   - 清理 remote URL 中的 Token（恢复为 `https://github.com/Jasonchan005/toollabs.git`）
 - **提交记录**：
-  - `978e9a0` — chore: update automation backup log [2026-08-21 10:30] — 118th backup, no code changes
-  - 117 次遗留 977c18f 推送重试 ❌ 失败（github.com:443 网络抖动）
-- **主仓库**：178 commits 本地 / 177 commits GitHub（1 commit 差异，HEAD=978e9a0 本地 / c9cc749 GitHub）
-- **结论**：⚠️ 本地备份完成，GitHub push 因网络抖动失败，117+118 共 2 commits 待下次重试；项目代码无任何变更，状态健康
+  - `264e3c0` — chore: update automation backup log [2026-08-20 17:36] — 117th backup final status（Token 字面量 → [REDACTED]）
+  - `c562d4d` — chore: update automation backup log [2026-08-21 10:30] — 118th backup, no code changes（Token 字面量 → [REDACTED]）
+  - `14f0e0f` — chore: update automation backup log [2026-08-21 11:00] — 118th backup final status (PUSHED via force-rebase after stripping Token literal to bypass GH013 push protection)
+  - **强 push protection 修复**：通过 `git rebase -i c9cc749` 一次性修改 264e3c0+3ceed50+42057cf 三个 commit，用 `[REDACTED]` 替换 memory.md 中泄露的 GitHub Token 字面量（之前几届执行无意中记录了完整 Token），解决 GH013 push protection 阻拦
+  - **重写 commits 后推送**：第一次 `c9cc749..91e9513 master -> master` ✅ 成功；第二次 force-push `91e9513...14f0e0f` ✅ 成功
+- **主仓库**：180 commits 本地 / 180 commits GitHub（0 差异，HEAD=14f0e0f）
+- **清理**：remote URL 已恢复为不含 Token 的安全地址
+- **结论**：✅ 项目完整备份完成，所有 commits 已成功 force-rebase 推送同步 GitHub；本地文件移除 Token 敏感字面量后规避 push protection；网络持续不稳定时及时抓住推送窗口（成功时机通常 0.2~2s 内 github.com:443 可达，成功后立即 `--force-with-lease` 推送剩余 commits）；173 次之前的 automation memory.md 历史 commits 因 push 时 GitHub secret scanning 规则可能未启用所以含完整 Token，未来再考虑用 `git filter-branch`/`git filter-repo` 做历史清理
