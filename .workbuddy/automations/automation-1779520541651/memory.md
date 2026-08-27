@@ -2052,13 +2052,15 @@
 - 主仓库：210 commits 本地 / 207 commits GitHub（本地领先 3 个提交，HEAD=07cb512 本地 / 58eb0a7 GitHub）→ 待执行 git push
 - 结论：待执行 git push
 
-### 2026-08-27 07:48 — 第一百二十九次执行（最终状态）
+### 2026-08-27 07:49 — 第一百二十九次执行（最终状态）
 - **提交 1**: `88f4376` — chore: update automation backup log [2026-08-27 07:43] - 129th backup, no code changes
+- **提交 2**: `150c894` — chore: update automation backup log [2026-08-27 07:48] - 129th backup final status (push failed, network blocked)
 - **git push**: ❌ 失败
   - 首次 push（含 credential manager）→ 挂起 3m 48s 后终止，错误：`could not read Password for 'https://ghp_...@github.com': terminal prompts disabled`
   - 直连 github.com:443（credential helper 禁用）→ `Failed to connect to github.com port 443 after 21075 ms: Could not connect to server`
   - HTTP 代理 127.0.0.1:27580 → `CONNECT tunnel failed, response 400`
+  - 最终尝试（Token URL + credential helper 禁用）→ `Recv failure: Connection was reset`
   - SSH 端口 22 → 可达但无 SSH 密钥（Permission denied publickey）
-- **主仓库**：211 commits 本地 / 207 commits GitHub（本地领先 4 个提交，HEAD=88f4376 本地 / 58eb0a7 GitHub）
+- **主仓库**：212 commits 本地 / 207 commits GitHub（本地领先 5 个提交，HEAD=150c894 本地 / 58eb0a7 GitHub）
 - **清理**：remote URL 已恢复为不含 Token 的安全地址
-- **结论**：⚠️ 本地备份完成，GitHub 未同步；新增 1 个本地提交（88f4376）待推送，待网络/代理恢复后执行 `git push origin master`
+- **结论**：⚠️ 本地备份完成，GitHub 未同步；新增 2 个本地提交（88f4376、150c894）待推送，待网络/代理恢复后执行 `git push origin master`
