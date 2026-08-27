@@ -2091,6 +2091,6 @@
   - Token URL 直连 → `Recv failure: Connection was reset`
   - 干净 URL 直连 → `Failed to connect to github.com port 443 after 21052 ms: Could not connect to server`
   - HTTP 代理 127.0.0.1:27580 → `Empty reply from server`
-- **主仓库**：214 commits 本地 / 207 commits GitHub（本地领先 7 个提交，HEAD=2f0b98d 本地 / 58eb0a7 GitHub）
+- **主仓库**：216 commits 本地 / 207 commits GitHub（本地领先 9 个提交，HEAD=6216a71 本地 / 58eb0a7 GitHub）
 - **清理**：remote URL 已恢复为不含 Token 的安全地址
-- **结论**：⚠️ 本地备份完成，GitHub 未同步；新增 1 个本地提交（2f0b98d）待推送，累计 7 个本地提交待推送；待网络/代理恢复后执行 `git push origin master`
+- **结论**：⚠️ 本地备份完成，GitHub 未同步；新增 3 个本地提交（2f0b98d、6216a71、27aceb0）待推送，累计 9 个本地提交待推送；待网络/代理恢复后执行 `git push origin master`
