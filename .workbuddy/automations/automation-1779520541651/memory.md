@@ -19,18 +19,15 @@
 - **结论**：待执行 git commit + push
 
 ### 2026-09-04 03:15 — 第一百四十四次执行（最终状态）
-- **提交**: `09df40f` — chore: update automation backup log [2026-09-04 03:15] - 144th backup, no code changes
-- **git push**: ✅ 第 13 次尝试后成功（URL 内嵌 token fallback 模式，沿用第 136/143 次验证方案）
-  - 第 1 次：Recv failure: Connection was reset
-  - 第 2-9 次：Failed to connect to github.com:443 after ~21s（HTTPS TCP 443 瞬态防火墙阻断）
-  - 第 5/8 次：已建立连接但 send-pack 中途断连 → "Everything up-to-date" 但 commit 未推送成功
-  - 期间诊断：nslookup github.com → 20.205.243.166 ✅ / ping github.com 46-48ms ✅ / curl api.github.com → 200 ✅ / curl github.com → 200 ✅（后期恢复），唯独 git smart-HTTP 协议被端口级阻断
-  - 第 13 次（约 12 分钟后）：`3b5e218..09df40f master -> master`
-  - `git fetch origin` → 验证 origin/master HEAD = 09df40f，0 差异
-- **主仓库最终状态**：251 commits 本地 / 251 commits GitHub（0 差异，HEAD=09df40f）
+- **提交**: `09df40f`（144th 主记录）+ `b319ca3`（最终状态回填）— 2 个 commit 全部 push 成功
+- **git push**: ✅ 2 次均成功（URL 内嵌 token fallback 模式）
+  - `3b5e218..09df40f master -> master`（主记录，第 13 次尝试后成功——前 12 次因 HTTPS TCP 443 瞬态防火墙阻断失败，约 12 分钟后自愈）
+  - `09df40f..b319ca3 master -> master`（最终状态回填，网络已稳定，一次成功）
+  - `git fetch origin` → 验证 origin/master HEAD = b319ca3，0 差异
+- **主仓库最终状态**：252 commits 本地 / 252 commits GitHub（0 差异，HEAD=b319ca3）
 - **清理**：remote URL 已恢复为不含 Token 的安全地址
 - **结论**：✅ 第一百四十四次半日备份完成，GitHub 已完全同步，项目状态健康，无核心代码变更
-- **本次网络特征**：比 143rd 更持久——共尝试 13 次累计 ~12 分钟才恢复，比 143rd 的 ~4 分钟长 3 倍。确认经验：纯耐心等 + 间隔 60-90s 重试，无需换 URL/Token/代理
+- **本次网络特征**：比 143rd 更持久——主 push 共尝试 13 次累计 ~12 分钟才恢复，比 143rd 的 ~4 分钟长 3 倍。确认经验：纯耐心等 + 间隔 60-90s 重试，无需换 URL/Token/代理
 
 ## 2026-09-03 15:15 — 第一百四十三次执行
 - **Git 状态**：核心代码无变更（index.html、pdf-to-word.html、compress-pdf.html、word-to-pdf.html、image-to-pdf.html、add-watermark.html、image-to-text.html、knowledge-graph-3d.html、css/style.css、js/*.js、lib/*.js、package.json 自 2026-05-22~05-30 起均无修改，mtime 最新 2026-05-30 package.json）
