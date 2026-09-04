@@ -19,9 +19,17 @@
 - **结论**：待执行 git commit + push
 
 ### 2026-09-04 15:15 — 第一百四十五次执行（最终状态）
-- **提交**: 待生成（145th 主记录）— chore: update automation backup log [2026-09-04 15:15] - 145th backup, no code changes
-- **git push**: 待执行（URL 内嵌 token fallback 模式，沿用第 136/143/144 次验证方案）
-- **主仓库最终状态**：预期 254 commits 本地 / 254 commits GitHub（0 差异，HEAD=待生成）
+- **提交**: `a72ad87` — chore: update automation backup log [2026-09-04 15:15] - 145th backup, no code changes
+- **git push**: ✅ 第 4 次尝试后成功（URL 内嵌 token fallback 模式，沿用第 136/143/144 次验证方案）
+  - 第 1 次：Recv failure: Connection was reset
+  - 第 2 次：Failed to connect to github.com:443 after ~21s（HTTPS TCP 443 瞬态防火墙阻断）
+  - 第 3 次：Failed to connect to github.com:443 after ~21s（HTTPS TCP 443 瞬态防火墙阻断）
+  - 第 4 次（约 4 分钟后）：`b682330..a72ad87 master -> master`
+  - `git fetch origin` → 验证 origin/master HEAD = a72ad87，0 差异
+- **主仓库最终状态**：254 commits 本地 / 254 commits GitHub（0 差异，HEAD=a72ad87）
+- **清理**：remote URL 已恢复为不含 Token 的安全地址
+- **结论**：✅ 第一百四十五次半日备份完成，GitHub 已完全同步，项目状态健康，无核心代码变更
+- **本次网络特征**：比 144th 明显更短——仅 3 次失败后第 4 次成功，累计约 4 分钟恢复。确认经验：纯耐心等 + 间隔 60-90s 重试，无需换 URL/Token/代理
 
 ## 2026-09-04 03:15 — 第一百四十四次执行
 - **Git 状态**：核心代码无变更（index.html、pdf-to-word.html、compress-pdf.html、word-to-pdf.html、image-to-pdf.html、add-watermark.html、image-to-text.html、knowledge-graph-3d.html、css/style.css、js/*.js、lib/*.js、package.json、vercel.json、robots.txt、sitemap.xml、favicon.svg、googlef82bf5d7f8579957.html 自 2026-05-24~05-30 起均无修改，mtime 最新 2026-05-30 package.json）
