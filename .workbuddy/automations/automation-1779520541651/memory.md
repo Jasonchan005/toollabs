@@ -8,7 +8,8 @@
 - **变更文件**：无核心代码变更；git-tracked 变更为本文件（153rd 最终状态回填 + 本次追加记录）
 - **操作**：新建 2026-09-10.md（154th 记录）、更新 MEMORY.md（last_updated→12:18）、追加 .private/project-backup.md（154th + 头部状态更新）、本文件追加 154th 记录、git add + commit + push（Token 认证，push 后清理 remote URL）
 - **主仓库（操作前）**：271 commits 本地 / 271 GitHub（0 差异，HEAD=0b02f46）
-- **结论**：待执行 git commit + push
+- **✅ 最终状态**：提交 `5cb729e` 推送成功（`0b02f46..5cb729e`）；push 第 6 次重试成功（1 次 sideband 断连、2 次 Connection reset、1 次 443 连接失败、1 次 Authentication failed，均为已知瞬态网络问题；重试间隔 70s）；remote URL 已清理 Token
+- **路径备注（154th 新增）**：发现本自动化记忆存在两个路径——git 跟踪的 `.workbuddy/automations/automation-1779520541651/memory.md` 与系统提示指向的 `.workbuddy/memory/automations/automation-1779520541651/memory.md`，内容此前完全同步；本次统一写入后者后复制到前者再 commit，后续运行需保持两份同步
 
 ## 2026-09-09 23:13 — 第一百五十三次执行
 - **触发**：项目半日备份自动化任务（约 12h 周期；距上次 2026-09-09 11:08 约 12 小时，符合常规周期）
