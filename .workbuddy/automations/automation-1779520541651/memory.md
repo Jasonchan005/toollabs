@@ -3005,3 +3005,14 @@
 - **校验**：`git ls-remote origin refs/heads/master` = `0a797d70ce0ab55c3db4ad045d13b91442b88d4f`，与本地 HEAD 完全一致
 - **清理**：remote URL 已恢复为不含 Token 的安全地址 `https://github.com/Jasonchan005/toollabs.git`
 - **结论**：✅ 第一百五十八次备份完成（含补齐 157th 遗留提交），GitHub 已完全同步，提交链线性无分叉，项目状态健康，无核心代码变更
+
+### 2026-09-12 16:38 — 第一百五十八次执行（收尾）
+- **本次共 4 个提交，全部推送成功**：
+  1. `c7259f6` — 157th 遗留未推送提交（本轮补齐）
+  2. `0b8a609` — 158th backup log（第 1 次推送即成功，37s）
+  3. `0a797d7` — finalize 158th backup status（失败 13 次后成功，34s）
+  4. `e55ca38` — correct 158th final status + credential.helper fix（成功，55s）
+  - 其后本文件的收尾追加会形成第 5 个文本提交（预期行为，见 past runs）
+- **最终校验**：`git remote -v` 已恢复为不含 Token 的 `https://github.com/Jasonchan005/toollabs.git`；本地 HEAD = 远端 `refs/heads/master` = `e55ca38`，**283 commits 本地 / 283 GitHub，0 差异**
+- **工作区剩余项（均为已知正常）**：submodules 脏（citation-gen / typing-test / vocab-test 的 vercel.json + debug.log，math-practice untracked yaml，指针未变）、untracked `check.js` / `screen.png`
+- **结论**：✅ 第一百五十八次备份全部完成。核心代码无变更；GitHub 完全同步；**本轮最大产出是定位并修复了 `credential.helper=helper-selector` 打断 push 的根因**，已写入 MEMORY.md 与 project-backup-executor skill（含排查优先级：先禁 credential.helper，再怀疑网络）
