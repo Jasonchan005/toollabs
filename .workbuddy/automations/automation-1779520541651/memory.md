@@ -3029,3 +3029,9 @@
 - **核心结论**：核心代码零变更（自 2026-05-30 起全部未改）；GitHub 完全同步，提交链线性无分叉
 - **本轮最大产出（已固化）**：定位并修复 `credential.helper=helper-selector`（Git Credential Manager）打断 `git-receive-pack` POST 握手导致的 push 失败（`send-pack: unexpected disconnect while reading sideband packet`）。解法 `GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master`。已写入：①MEMORY.md 踩坑经验（标注为第 158 次新增、修正 136th 结论）②本文件 ③`.private/project-backup.md` ④`project-backup-executor` skill（新增「Push failure triage」优先级章节）⑤用户级 `~/.workbuddy/MEMORY.md` 环境踩坑（跨项目通用）
 - **排查优先级（下次务必遵守）**：先试禁用 credential.helper → 再查连通性（curl / ls-remote）→ 最后才耐心重试等瞬态恢复。**不要一上来就循环重试**（本轮曾白白重试 13 次、耗时近 20 分钟）
+
+### 2026-09-13 06:07 — 第一百五十九次执行
+- **Git 状态检查**：核心代码零变更（index.html、pdf-to-word.html 等 HTML、css/、js/、lib/、package.json、vercel.json、sitemap.xml 自 2026-05-31 起均无修改）
+- **已知正常脏状态（未变）**：citation-gen/typing-test/vocab-test（vercel.json + debug.log）、math-practice（untracked yaml）、untracked `check.js` / `screen.png`
+- **主仓库（操作前）**：285 commits 本地（HEAD=51ead44），远端已同步（158th 终态）
+- **操作**：追加本记录（双路径同步：.workbuddy/automations/ 为 git 跟踪副本，.workbuddy/memory/automations/ 为 gitignored 副本）+ 当天日志 2026-09-13.md（新建）+ project-backup.md（159th 记录）
