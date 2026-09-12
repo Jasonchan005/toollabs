@@ -2990,3 +2990,18 @@
 - **校验**：`git ls-remote origin refs/heads/master` = `0b8a6098b082c44284c5db987fd2ff3b838499c9`，与本地 HEAD 完全一致
 - **清理**：remote URL 已恢复为不含 Token 的安全地址 `https://github.com/Jasonchan005/toollabs.git`
 - **结论**：✅ 第一百五十八次备份完成，GitHub 已完全同步，提交链线性无分叉，项目状态健康，无核心代码变更
+
+### 2026-09-12 16:33 — 第一百五十八次执行（最终状态 · 修正）
+- **实际最终提交**：`0a797d7` — chore: finalize 158th backup status [2026-09-12 15:38]
+- **两段推送历史（重要）**：
+  - 提交 1 `0b8a609`（158th 记录）→ **第 1 次即成功**（`aacb8bb..0b8a609`，37s），同批补齐 157th 遗留提交 `c7259f6`
+  - 提交 2 `0a797d7`（158th 最终状态回填）→ **连续失败 13 次后成功**（`0b8a609..0a797d7`，34s）
+- **⚠️ 新增踩坑（第 158 次核心发现）**：`git push` 连续 13 次报 `send-pack: unexpected disconnect while reading sideband packet`（偶伴随 `Recv failure: Connection was reset`），同时 `curl https://github.com` 返回 HTTP 200、`git ls-remote` 正常，DNS/连通性无问题，待推对象仅 6 个（payload 极小），排除网络体积因素。
+  - **根因**：本地 `credential.helper=helper-selector`（Git Credential Manager）会在 push 环节介入并打断 `git-receive-pack` 的 POST 上传握手。
+  - **解法**：`GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master` —— **一次成功**。
+  - **与 136th 旧结论的关系（重要修正）**：136th 记录"`-c credential.helper=` 会触发 could not read Username"——该结论**仅在 remote URL 为 token-only 形式（`https://<TOKEN>@github.com/...`）时成立**。当 URL 为 **username:token 形式**（`https://Jasonchan005:<TOKEN>@github.com/...`）时，凭据直接来自 URL，不需要 credential helper，此时 **必须显式禁用 `credential.helper`** 才能避免 GCM 打断 push。
+  - **新标准模板**：`git remote set-url origin "https://Jasonchan005:<TOKEN>@github.com/Jasonchan005/toollabs.git"` → `GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master` → `git remote set-url origin "https://github.com/Jasonchan005/toollabs.git"`
+- **主仓库**：282 commits 本地 / 282 commits GitHub（0 差异，HEAD=0a797d7）
+- **校验**：`git ls-remote origin refs/heads/master` = `0a797d70ce0ab55c3db4ad045d13b91442b88d4f`，与本地 HEAD 完全一致
+- **清理**：remote URL 已恢复为不含 Token 的安全地址 `https://github.com/Jasonchan005/toollabs.git`
+- **结论**：✅ 第一百五十八次备份完成（含补齐 157th 遗留提交），GitHub 已完全同步，提交链线性无分叉，项目状态健康，无核心代码变更
