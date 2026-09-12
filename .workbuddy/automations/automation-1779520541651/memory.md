@@ -3035,3 +3035,4 @@
 - **已知正常脏状态（未变）**：citation-gen/typing-test/vocab-test（vercel.json + debug.log）、math-practice（untracked yaml）、untracked `check.js` / `screen.png`
 - **主仓库（操作前）**：285 commits 本地（HEAD=51ead44），远端已同步（158th 终态）
 - **操作**：追加本记录（双路径同步：.workbuddy/automations/ 为 git 跟踪副本，.workbuddy/memory/automations/ 为 gitignored 副本）+ 当天日志 2026-09-13.md（新建）+ project-backup.md（159th 记录）
+- **✅ 159th 终态**：提交 `97fe558` 推送成功（`51ead44..97fe558`；第 1-3 次尝试因 github.com:443 瞬态阻断失败，属 143rd 已知模式，间隔 70-80s + 连通性探测确认恢复后第 4 次成功）；`git ls-remote` 校验与本地 HEAD 一致；remote URL 已恢复不含 Token
