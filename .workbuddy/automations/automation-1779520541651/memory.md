@@ -3016,3 +3016,16 @@
 - **最终校验**：`git remote -v` 已恢复为不含 Token 的 `https://github.com/Jasonchan005/toollabs.git`；本地 HEAD = 远端 `refs/heads/master` = `e55ca38`，**283 commits 本地 / 283 GitHub，0 差异**
 - **工作区剩余项（均为已知正常）**：submodules 脏（citation-gen / typing-test / vocab-test 的 vercel.json + debug.log，math-practice untracked yaml，指针未变）、untracked `check.js` / `screen.png`
 - **结论**：✅ 第一百五十八次备份全部完成。核心代码无变更；GitHub 完全同步；**本轮最大产出是定位并修复了 `credential.helper=helper-selector` 打断 push 的根因**，已写入 MEMORY.md 与 project-backup-executor skill（含排查优先级：先禁 credential.helper，再怀疑网络）
+
+### 2026-09-12 16:44 — 第一百五十八次执行（终态）
+- **主仓库终态（记录时点）**：`git ls-remote origin refs/heads/master` = `1f6f658ba744608b4b5bcf4eff08986712fb7a48` = 本地 HEAD；`git rev-list --left-right --count origin/master...HEAD` = `0 0`；**284 commits 本地 / 284 GitHub，0 差异**；`git remote -v` = 不含 Token 的 `https://github.com/Jasonchan005/toollabs.git`
+- **本次执行共 5 个提交，全部推送成功**：
+  1. `c7259f6` — 157th 遗留未推送提交（本轮补齐）
+  2. `0b8a609` — 158th backup log（第 1 次推送即成功，37s）
+  3. `0a797d7` — finalize 158th backup status（13 次失败后成功，34s）
+  4. `e55ca38` — correct 158th final status + credential.helper fix（成功，55s）
+  5. `1f6f658` — close out 158th backup（第 2 次尝试成功，54s；第 1 次 `Recv failure: Connection was reset`，属 143rd 所述瞬态网络）
+  - 本「终态」追加记录本身会形成第 6 个文本提交——**属预期行为**，与既往各轮一致，不影响仓库一致性判定
+- **核心结论**：核心代码零变更（自 2026-05-30 起全部未改）；GitHub 完全同步，提交链线性无分叉
+- **本轮最大产出（已固化）**：定位并修复 `credential.helper=helper-selector`（Git Credential Manager）打断 `git-receive-pack` POST 握手导致的 push 失败（`send-pack: unexpected disconnect while reading sideband packet`）。解法 `GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master`。已写入：①MEMORY.md 踩坑经验（标注为第 158 次新增、修正 136th 结论）②本文件 ③`.private/project-backup.md` ④`project-backup-executor` skill（新增「Push failure triage」优先级章节）⑤用户级 `~/.workbuddy/MEMORY.md` 环境踩坑（跨项目通用）
+- **排查优先级（下次务必遵守）**：先试禁用 credential.helper → 再查连通性（curl / ls-remote）→ 最后才耐心重试等瞬态恢复。**不要一上来就循环重试**（本轮曾白白重试 13 次、耗时近 20 分钟）
