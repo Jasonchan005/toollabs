@@ -3172,3 +3172,14 @@
 - **校验**：`git ls-remote` = 本地 HEAD = `c4ec765`；`rev-list --left-right --count` = `0 0`；301 commits（含全部历史）
 - **清理**：remote URL 已恢复为不含 Token 的 `https://github.com/Jasonchan005/toollabs.git`
 - **结论**：✅ 第一百六十五次备份完成。核心代码零变更；GitHub 完全同步；网络通畅无需重试；12h 周期已恢复正常
+
+## 2026-09-20 00:41 — 第一百六十六次执行
+- **触发**：项目半日备份自动化任务（约 12h 周期；距上次 2026-09-19 12:29 约 12.2 小时，符合常规周期）
+- **Git 状态**：核心代码无变更（index.html、pdf-to-word.html、css/、js/、lib/ 等核心文件均无修改）
+- **子模块/嵌套仓库脏状态**：citation-gen / typing-test / vocab-test（vercel.json + debug.log 本地修改，指针未变）、math-practice（untracked yaml）；与上轮一致，无需处理
+- **未纳入版控（正常）**：check.js、screen.png
+- **变更文件**：无核心代码变更；git-tracked 变更为本文件（165th 收尾已入库 + 本次追加记录）
+- **操作**：新建 .workbuddy/memory/2026-09-20.md（166th 记录）、更新 MEMORY.md（last_updated→00:41）、追加 .private/project-backup.md（166th + 头部状态更新）、本文件追加 166th 记录、git add + commit + push（username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **主仓库（操作前）**：301 commits 本地，HEAD=9a2df4d；ls-remote 首次尝试遇 Connection was reset（已知瞬态网络问题），push 阶段重试验证
+- **结论**：待执行 git commit + push（终态见下方回填）
+
