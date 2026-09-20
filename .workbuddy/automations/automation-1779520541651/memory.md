@@ -3194,3 +3194,15 @@
 - **结论**：✅ 第一百六十六次半日备份完成，GitHub 已完全同步，无核心代码变更
 - **本次网络特征**：首推 Connection reset → 重试第 1 次成功；ls-remote 在网络抖动下挂起（30s+ 无输出），与 push 本身无关
 
+- **收尾提交**: `b505146`（chore: close out 166th backup [2026-09-20 01:15]）推送成功（888bc49..b505146），一次成功；最终 304 commits 本地 / 304 GitHub（0 差异，HEAD=b505146），remote URL 已清理
+
+
+## 2026-09-20 13:12 — 第一百六十七次执行
+- **触发**：项目半日备份自动化任务（约 12h 周期；距上次 2026-09-20 01:15 收尾约 12 小时，符合常规周期）
+- **Git 状态**：核心代码无变更（index.html、pdf-to-word.html、css/、js/、lib/ 等核心文件均无修改）
+- **子模块/嵌套仓库脏状态**：citation-gen / typing-test / vocab-test（vercel.json + debug.log 本地修改，指针未变）、math-practice（untracked yaml）；与上轮一致，无需处理
+- **未纳入版控（正常）**：check.js、screen.png
+- **变更文件**：无核心代码变更；git-tracked 变更为本文件（166th 收尾已入库 + 本次追加记录）
+- **操作**：追加当天日志 2026-09-20.md → 更新 MEMORY.md（last_updated→13:12）→ 追加 .private/project-backup.md（167th + 头部更新）→ 追加本文件（双路径同步）→ git add + commit + push（username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **主仓库（操作前）**：304 commits 本地，HEAD=b505146
+- **结论**：待执行 git commit + push（终态见下方回填）
