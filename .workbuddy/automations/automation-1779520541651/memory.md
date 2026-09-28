@@ -3403,13 +3403,23 @@
 - **结论**：待执行 git commit + push，终态见下方回填
 
 ### 第一百七十七次备份（最终状态）
-- **提交**: （待推送后回填）
-- **git push**: （待执行）
-- **校验**: （待执行）
-- **清理**: （待执行）
-- **本地记忆同步**: （待执行）
-- **结论**: （待执行）
+- **提交**: `b5b1e91` — chore: update automation backup log [2026-09-28 14:22] - 177th backup, no code changes
+- **git push**: ✅ 第 1 次尝试即成功（`8605b4b..b5b1e91 master -> master`，约 14:25）；标准模板 `GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master` + username:token URL
+- **校验**: git ls-remote = 本地 HEAD = `b5b1e91`；GitHub API commits/master 返回 sha=b5b1e91（一致），date=2026-09-28T06:25:36Z；316 commits 本地 / 316 GitHub（0 差异，完全同步）
+- **清理**: remote URL 已恢复为不含 Token 的安全地址
+- **本地记忆同步**: 2026-09-28.md（新建 177th 记录+终态）、MEMORY.md（last_updated→14:22、计数→177）、project-backup.md（177th 记录+终态+头部更新）、本文件镜像副本已同步
+- **结论**: ✅ 第一百七十七次半日备份完成，GitHub 完全同步，无核心代码变更
 
 ---
 ## 2026-09-28 执行摘要（177th）
-- （待推送后回填）
+- 备份完成：提交 b5b1e91 已推送 GitHub（316/316 同步）；核心代码零变更；距上轮约 19.4h（09-28 早间周期未触发，本次已补上，后续以本次为基准）；推送一次成功，remote URL 已复原；本地记忆（2026-09-28.md / MEMORY.md / project-backup.md）均已更新
+
+## 2026-09-29 02:34 — 第一百七十八次备份
+- **触发**：12h 周期自动化；距 177th（2026-09-28 14:22）约 12.2 小时，正点触发，无窗口错过
+- **Git 状态**：核心代码零变更（index.html、各工具页 html、css/style.css、js/*.js、lib/*.js、package.json、vercel.json 等均无修改）
+- **子模块/嵌套仓库脏状态**：citation-gen / typing-test / vocab-test（本地 vercel.json/debug.log 修改，指针未变）、math-practice（untracked yaml）——与 177th 一致，无需处理
+- **主仓库（操作前）**：316 commits 本地，HEAD=b5b1e91，与远端同步
+- **变更文件**：git-tracked 仅本文件（177th 收尾回填入库 + 本次追加记录）；gitignored 本地记忆同步更新（2026-09-29.md 新建 / MEMORY.md / project-backup.md）
+- **结论**：待执行 git commit + push，终态见下方回填
+
+---
