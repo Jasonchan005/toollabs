@@ -3423,3 +3423,26 @@
 - **结论**：待执行 git commit + push，终态见下方回填
 
 ---
+
+### 第一百七十八次备份（最终状态）
+- **提交**: `094d64e` — chore: update automation backup log [2026-09-29 02:34] - 178th backup, no code changes
+- **git push**: ✅ 第 3 次尝试成功（`b5b1e91..094d64e master -> master`，约 02:40）；标准模板 `GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master` + username:token URL；前 2 次失败：第 1 次 Authentication failed（瞬态，同期 GitHub API 验证 Token 有效=200）、第 2 次 github.com:443 瞬态阻断（143th 已知模式），等待 75s 后一次成功
+- **校验**: 本地 HEAD = `094d64e`；GitHub API commits/master 返回 sha=094d64e（一致）；317 commits 本地 / 317 GitHub（0 差异，完全同步）
+- **清理**: remote URL 已恢复为不含 Token 的安全地址
+- **本地记忆同步**: 2026-09-29.md（新建 178th 记录+终态）、MEMORY.md（last_updated→02:34、计数→178）、project-backup.md（178th 记录+终态+头部更新）、本文件镜像副本已同步
+- **结论**: ✅ 第一百七十八次半日备份完成，GitHub 完全同步，无核心代码变更
+
+---
+## 2026-09-29 执行摘要（178th）
+- 备份完成：提交 094d64e 已推送 GitHub（317/317 同步）；核心代码零变更；距上轮约 12.2h，正点触发；推送历经 2 次瞬态失败（Authentication failed + 443 阻断，Token 经 API 验证仍有效）后第 3 次成功，remote URL 已复原；本地记忆（2026-09-29.md / MEMORY.md / project-backup.md）均已更新
+
+---
+## 2026-09-30 11:09 — 第一百七十九次备份
+- **触发**：12h 周期自动化；距 178th（2026-09-29 02:34）约 32.6 小时，**错过 09-29 14:34 与 09-30 02:34 两个窗口**，本次补跑，后续以本次为基准
+- **Git 状态**：核心代码零变更（index.html、各工具页 html、css/style.css、js/*.js、lib/*.js、package.json、vercel.json 等均无修改）
+- **子模块/嵌套仓库脏状态**：citation-gen / typing-test / vocab-test（本地 vercel.json/debug.log 修改，指针未变）、math-practice（untracked yaml）——与 178th 一致，无需处理
+- **主仓库（操作前）**：317 commits 本地，HEAD=094d64e，与远端同步（ls-remote 确认一致）
+- **网络**：最初 ls-remote 连续 3 次 github.com:443 阻断（第 143 次已知模式），约 4 分钟后恢复（curl github.com=200 / api.github.com=200）
+- **变更文件**：git-tracked 仅本文件（178th 收尾回填入库 + 本次追加记录）；gitignored 本地记忆同步更新（2026-09-30.md 新建 / MEMORY.md / project-backup.md）
+- **结论**：待执行 git commit + push，终态见下方回填
+
