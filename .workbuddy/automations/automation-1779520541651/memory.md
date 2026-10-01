@@ -3518,9 +3518,14 @@
 - **git push**: ✅ 第 1 次尝试成功（`fafee98..ed91626 master -> master`，约 00:14）；标准模板 `GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin master` + username:token URL；执行前 ls-remote 曾报 `Recv failure: Connection was reset`（第 143 次瞬态模式），push 时网络已自恢复，未再重试
 - **校验**: 本地 HEAD = `ed91626`；GitHub API commits/master 返回 sha=ed9162657b34b76af03510c193b4214cbf5beec3（一致）；324 commits 本地 / 324 GitHub（0 差异，完全同步）
 - **清理**: remote URL 已恢复为不含 Token 的安全地址
-- **收尾提交**: `efabd7e`（终态回填）已推送（第 1 次尝试成功，`ed91626..efabd7e`），最终 HEAD=efabd7e，325 commits 本地 / 325 GitHub（0 差异，完全同步）
+- **收尾提交**: `efabd7e`（终态回填）已推送（第 1 次尝试成功，`ed91626..efabd7e`），325 commits 本地 / 325 GitHub（0 差异，完全同步）
 - **本地记忆同步**: 2026-10-02.md（新建 182nd 记录+终态）、MEMORY.md（last_updated→2026-10-02T00:06、计数→182）、project-backup.md（182nd 记录+终态+头部更新）、本文件镜像副本已同步
 - **结论**: ✅ 第一百八十二次半日备份完成，GitHub 完全同步，无核心代码变更
+
+### 第一百八十二次备份 — 终态修正（收尾）
+- **本轮共 3 次提交**：① `ed91626`（182nd 备份日志，首次 push 成功）→ ② `efabd7e`（终态回填）→ ③ 最终收尾提交（记录 3 次提交明细，327 前的最后一笔）
+- **最终 HEAD / 计数**: 以 `.private/project-backup.md` 头部与 `.workbuddy/memory/2026-10-02.md` 为准（gitignored 权威记录）；本地与 GitHub 一致（api.github.com 校验通过）
+- **说明**: 为避免"记录自身哈希→产生新提交→哈希再变"的无限回填循环，自本次起最终 HEAD 与 commits 计数统一写入 gitignored 档案（project-backup.md 头部），本文件（git 跟踪）只保留过程日志。**后续轮次请以 project-backup.md 头部为唯一权威终态来源。**
 
 ---
 ## 2026-10-02 执行摘要（182nd）
