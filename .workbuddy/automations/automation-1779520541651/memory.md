@@ -3532,3 +3532,21 @@
 - 备份完成：提交 ed91626 已推送 GitHub（324/324 同步）；核心代码零变更；距上轮约 12.0h，正点触发；**推送第 1 次即成功**（近年少见，上次一次成功为 179th）；执行前 ls-remote 遇 443 瞬态阻断（`Recv failure: Connection was reset`），push 时已自恢复；remote URL 已复原；本地记忆（2026-10-02.md / MEMORY.md / project-backup.md）均已更新
 
 
+
+### ★ 182nd 权威终态（gitignored 副本专记，供下轮读取）
+- **最终 HEAD**: `97b5fe56db0e4430c72a29caadc1eecc9b02ab10`
+- **commits**: 327 本地 / 327 GitHub（0 差异，**api.github.com 实测校验通过**）
+- **提交链（4 笔，全部一次推送成功）**: ed91626（182nd 日志）→ efabd7e（终态回填）→ 86d03c8（终态修正）→ 97b5fe5（收尾）
+- **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **网络**: 执行前 github.com:443 报 `Recv failure: Connection was reset`（143th 瞬态模式）；push 时已自恢复；收尾校验时 api.github.com 短暂 HTTP=000，等 20s 后恢复 200
+- **新规范**: 自 182nd 起，最终 HEAD / 计数以 `.private/project-backup.md` 头部为唯一权威来源（避免哈希自引用无限回填）；本文件（双路径）保留过程日志
+
+---
+## 2026-10-03 00:30 — 第一百八十三次备份
+- **触发**：12h 周期自动化；距 182nd（2026-10-02 00:06，终态 97b5fe5 @327 commits）约 24.4 小时，**错过 1 个窗口（10-02 12:06）后补跑**
+- **Git 状态**：核心代码零变更（工作树干净；仅 citation-gen / typing-test / vocab-test / math-practice 四个嵌套仓库脏，指针未变，属常态）
+- **主仓库（操作前）**：327 commits 本地，HEAD=97b5fe5，与 project-backup.md 头部权威记录一致
+- **网络**：预检 api.github.com=200，连通正常
+- **变更文件**：git-tracked 仅本文件（183rd 收尾回填入库 + 本次追加记录）；gitignored 本地记忆同步更新（2026-10-03.md 新建 / MEMORY.md / project-backup.md）
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
