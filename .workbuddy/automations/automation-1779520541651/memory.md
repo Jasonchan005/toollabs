@@ -3586,4 +3586,19 @@
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
 
 ### ★ 185th 权威终态（gitignored 副本专记，供下轮读取）
-- 待回填（推送完成后更新）
+- **最终 HEAD**: `0594103022fc88f6b2e3f738c48ea856c268396b`
+- **commits**: 330 本地 / 330 GitHub（0 差异，api.github.com 实测校验通过）
+- **提交链（1 笔）**: 0594103（004bf38..0594103，第 1 次尝试推送成功；预检 github.com=200 / api.github.com=200）
+- **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: 185th 半日备份，无核心代码变更；本轮距上轮 50.8h（错过约 4 个窗口后补跑）；终态以 project-backup.md 头部为权威
+
+---
+## 2026-10-06 03:42 — 第一百八十六次备份
+- **触发**：12h 周期自动化；距 185th（2026-10-05 15:31，终态 0594103 @330 commits）约 12.2 小时，12h 周期正点触发，无窗口错过；本次为第 186 次半日备份
+- **Git 状态**：核心代码零变更（工作树仅 citation-gen / typing-test / vocab-test（指针未变）、math-practice（untracked yaml）四个嵌套仓库脏，属常态）
+- **主仓库（操作前）**：330 commits 本地，HEAD=0594103，与 project-backup.md 头部权威记录一致
+- **网络**：预检 github.com=200 / api.github.com=200，连通正常
+- **变更文件**：git-tracked 仅本文件（186th 记录追加）；gitignored 本地记忆同步更新（2026-10-06.md 新建 / MEMORY.md / project-backup.md）
+- **操作**：新建 2026-10-06.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
