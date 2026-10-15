@@ -3676,3 +3676,22 @@
 - **变更文件**：git-tracked 仅本文件（190th 记录追加）；gitignored 本地记忆同步更新（2026-10-11.md 新建 / MEMORY.md / project-backup.md）
 - **操作**：新建 2026-10-11.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
+
+### ★ 190th 权威终态（gitignored 副本专记，供下轮读取）
+- **最终 HEAD**: `7738eeaa9559dc6c2e146ccd496477d9aadf9419`
+- **commits**: 335 本地 / 335 GitHub（0 差异，api.github.com 实测校验通过）
+- **提交链（1 笔）**: 7738eea（531f0fe..7738eea，第 11 次尝试推送成功；前 10 次均为 github.com:443 瞬态阻断，约 21s 超时，且 curl 同 IP 亦不通；第 11 次约 16:35 恢复后一次成功）
+- **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: 190th 半日备份完成，无核心代码变更；本轮距上轮约 44.7h（错过约 3 个窗口后补跑）；本次 443 阻断持续约 21 分钟（明显长于第 143 次记载的 ~4 分钟）后自行恢复
+
+---
+## 2026-10-15 12:11 — 第一百九十一次备份
+- **触发**：12h 周期自动化；距 190th（2026-10-11 15:42，终态 7738eea @335 commits）约 92.5 小时，**错过约 7 个窗口（10-12 03:42 / 10-12 15:42 / 10-13 03:42 / 10-13 15:42 / 10-14 03:42 / 10-14 15:42 / 10-15 03:42）后补跑**；本次为第 191 次半日备份
+- **Git 状态**：核心代码零变更（工作树仅嵌套仓库脏；核心文件 mtime 仍为 2026-05-22~05-31，最晚 2026-05-31 20:41 galaxymind/index.html）
+- **子模块/嵌套仓库脏状态**：citation-gen / typing-test / vocab-test（本地文件修改，指针未变）、math-practice（untracked yaml）——与 190th 完全一致，属常态
+- **主仓库（操作前）**：335 commits 本地，HEAD=7738eea，与 project-backup.md 头部权威记录一致
+- **网络**：预检 github.com=000（第 143 次已知瞬态 443 阻断模式）；api.github.com=200，以 git 直连实测为准
+- **变更文件**：git-tracked 仅本文件（191st 记录追加 + 190th 终态块回填一并提交）；gitignored 本地记忆同轮更新（2026-10-15.md 新建 / MEMORY.md / project-backup.md）
+- **操作**：新建 2026-10-15.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
