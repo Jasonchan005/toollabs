@@ -3695,3 +3695,22 @@
 - **变更文件**：git-tracked 仅本文件（191st 记录追加 + 190th 终态块回填一并提交）；gitignored 本地记忆同轮更新（2026-10-15.md 新建 / MEMORY.md / project-backup.md）
 - **操作**：新建 2026-10-15.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
+
+### ★ 191st 权威终态（gitignored 副本专记，供下轮读取）
+- **最终 HEAD**: `3d043fca36e7020b48ac4846e844eb6d6c1c2a13`
+- **commits**: 336 本地 / 336 GitHub（0 差异，api.github.com 实测校验通过）
+- **提交链（1 笔）**: 3d043fc（7738eea..3d043fc，第 4 次尝试推送成功；前 3 次为 github.com:443 瞬态阻断，21~33s 超时 / Connection reset，约 9 分钟后恢复）
+- **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: 191st 半日备份完成，无核心代码变更；本轮距上轮约 92.5h（错过约 7 个窗口后补跑）；终态以 project-backup.md 头部为权威
+
+---
+## 2026-10-16 22:16 — 第一百九十二次备份
+- **触发**：12h 周期自动化；距 191st（2026-10-15 12:11，终态 3d043fc @336 commits）约 34.1 小时，**错过约 2 个窗口（10-16 00:11 / 10-16 12:11）后补跑**；本次为第 192 次半日备份
+- **Git 状态**：核心代码零变更（工作树仅嵌套仓库脏；核心文件 mtime 仍为 2026-05-22~05-31，最晚 2026-05-31 20:41 galaxymind/index.html）
+- **子模块/嵌套仓库脏状态**：citation-gen / typing-test / vocab-test（本地文件修改，指针未变）、math-practice（untracked yaml）——与 191st 完全一致，属常态
+- **主仓库（操作前）**：336 commits 本地，HEAD=3d043fc，与 project-backup.md 头部权威记录一致
+- **网络**：预检 github.com=200 / api.github.com=200（本轮网络健康，无 443 阻断）
+- **变更文件**：git-tracked 仅本文件（192nd 记录追加）；gitignored 本地记忆同轮更新（2026-10-16.md 新建 / MEMORY.md / project-backup.md）
+- **操作**：新建 2026-10-16.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
