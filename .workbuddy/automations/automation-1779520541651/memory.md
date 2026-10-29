@@ -3757,3 +3757,13 @@
 - **操作**：新建 2026-10-20.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
 
+---
+## 2026-10-29 10:54 — 第一百九十六次备份
+- **触发**：12h 周期自动化；距 195th（2026-10-20 15:34，终态 3320d01 @340 commits）约 211.3 小时（≈8.8 天），错过约 17 个窗口后补跑；本次为第 196 次半日备份
+- **Git 状态**：核心代码零变更（核心文件 mtime 仍为 2026-05-23~05-29）
+- **子模块/嵌套仓库脏状态**：与 195th 完全一致，指针未变，属常态
+- **主仓库（操作前）**：340 commits 本地，HEAD=3320d01
+- **网络**：预检 github.com=200（直连正常）、api.github.com 超时（模式反转），以 git 直连实测为准
+- **变更文件**：git-tracked 仅本文件（196th 记录追加）；gitignored 本地记忆同轮更新（2026-10-29.md 新建 / MEMORY.md / project-backup.md）
+- **操作**：新建 2026-10-29.md → 更新 MEMORY.md → 更新+前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板），完成后恢复 remote URL
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
