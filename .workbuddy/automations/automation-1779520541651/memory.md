@@ -3781,9 +3781,9 @@
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
 
 ### ★ 197th 权威终态（gitignored 副本专记，供下轮读取）
-- **最终 HEAD**: （push 后回填）
-- **commits**: （push 后回填）
-- **提交链**: 5edd330 → （回填）
+- **最终 HEAD**: `ee01c236eeb8517ba9b2d2c641f26d4bef68ea7a`
+- **commits**: 342 本地 / 342 远端（0 差异，ls-remote + origin/master 实测）
+- **提交链**: 5edd330 → ee01c23（一次推送成功，无 443 阻断）
 - **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
 - **结论**: 197th 半日备份完成，无核心代码变更；本轮距上轮约 25.2h（错过约 1 个窗口后补跑）；终态以 project-backup.md 头部为权威
