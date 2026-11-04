@@ -3859,4 +3859,12 @@
 - **网络**：ls-remote 直连秒回，推送链路预期健康
 - **变更文件**：git-tracked 仅本文件（201st 记录追加）；gitignored 本地记忆同轮更新（2026-11-04.md 新建 / MEMORY.md / project-backup.md）
 - **操作**：新建 2026-11-04.md → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
-- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
+- **结论**：✅ git commit + push 完成（e9a6e64，第 5 次重试成功），终态见下方权威终态块
+
+### ★ 201st 权威终态（gitignored 副本专记，供下轮读取）
+- **最终 HEAD**: `e9a6e64e7fc5ddc7121cb47770737fd52eb051bf`
+- **commits**: 350 本地 / 350 远端（0 差异，ls-remote 实测）+1 笔终态回填提交 → 351
+- **提交链**: d7009ac → e9a6e64（17:06:22 第 5 次重试成功；443 阻断持续约 10 分钟，16:56 首试起连续 4 次 ~21s 超时）
+- **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: 201st 半日备份完成，无核心代码变更；本轮距上轮约 76.5h（错过约 6 个窗口后补跑）；终态以 project-backup.md 头部为权威
