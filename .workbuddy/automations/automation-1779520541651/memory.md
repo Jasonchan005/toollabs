@@ -3906,10 +3906,11 @@
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
 
 ### ★ 203rd 权威终态
-- **最终 HEAD**: 待回填
-- **commits**: 待回填
-- **提交链**: 待回填
-- **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
-- **工作树**: 待回填
-- **结论**: 203rd 半日备份，无核心代码变更；本轮距上轮约 36.6h（错过约 3 个窗口后补跑）；终态以 project-backup.md 头部为权威
+- **最终 HEAD**: `01d1360`（01d13605268496256013d8ffc675c3272643753c）
+- **commits**: 354 本地 / 354 远端（0 差异，ls-remote 实测）
+- **提交链**: f1d0649 → 01d1360（11:25:39 第 5 次重试成功；github.com:443 瞬态阻断自 11:17 持续约 8 分钟）
+- **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: 203rd 半日备份完成，无核心代码变更；本轮距上轮约 36.6h（错过约 3 个窗口后补跑）；终态以 project-backup.md 头部为权威
+- **踩坑**: 首轮 push 报 `Authentication failed`（实为 443 阻断叠加），但同一 Token 经 api.github.com 验证返回 200 有效——**遇 auth failed 先查 443 可达性，勿急着换 Token**
 
