@@ -3847,6 +3847,7 @@
 - **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
 - **结论**: 200th 半日备份完成，无核心代码变更；本轮距上轮约 12.7h 正点触发；终态以 project-backup.md 头部为权威
+- **备注**: 本轮另有 1 笔终态回填提交 d7009ac（仅改 git 跟踪的 automation memory 终态块），远端最终 349 commits；下轮开工先以 ls-remote 实测远端 HEAD 与本记录比对
 
 ---
 
@@ -3861,7 +3862,7 @@
 - **操作**：新建 2026-11-04.md → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
 - **结论**：✅ git commit + push 完成（e9a6e64，第 5 次重试成功），终态见下方权威终态块
 
-### ★ 201st 权威终态（gitignored 副本专记，供下轮读取）
+### ★ 201st 权威终态
 - **最终 HEAD**: `e9a6e64e7fc5ddc7121cb47770737fd52eb051bf`
 - **commits**: 350 本地 / 350 远端（0 差异，ls-remote 实测）+1 笔终态回填提交 → 351
 - **提交链**: d7009ac → e9a6e64（17:06:22 第 5 次重试成功；443 阻断持续约 10 分钟，16:56 首试起连续 4 次 ~21s 超时）
@@ -3890,6 +3891,7 @@
 - **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
 - **结论**: 202nd 半日备份完成，无核心代码变更；本轮距上轮约 29.75h（错过约 2 个窗口后补跑）；终态以 project-backup.md 头部为权威
+- **备注**: 本轮另有 1 笔终态回填提交 f1d0649（仅改 git 跟踪的 automation memory 终态块），远端最终 353 commits；下轮以 `git ls-remote` 实测比对
 
 
 ---
@@ -3901,7 +3903,7 @@
 - **子模块/嵌套仓库脏状态**：citation-gen（m）、typing-test（m）、vocab-test（m）、math-practice（?）——与 202nd 完全一致，指针未变，属常态
 - **主仓库（操作前）**：353 commits 本地，HEAD=f1d0649；`git ls-remote origin refs/heads/master` 实测 = f1d0649（一致，上轮无遗留占位）
 - **网络**：ls-remote 秒回，推送链路预期健康
-- **变更文件**：git-tracked 仅本文件（203rd 记录追加）；gitignored 本地记忆同轮更新（2026-11-07.md 新建 / MEMORY.md / project-backup.md）
+- **变更文件**：git-tracked 仅 automation memory（203rd 记录追加）；gitignored 本地记忆同轮更新（2026-11-07.md 新建 / MEMORY.md / project-backup.md）
 - **操作**：新建 2026-11-07.md → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
 
@@ -3912,5 +3914,24 @@
 - **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
 - **结论**: 203rd 半日备份完成，无核心代码变更；本轮距上轮约 36.6h（错过约 3 个窗口后补跑）；终态以 project-backup.md 头部为权威
-- **踩坑**: 首轮 push 报 `Authentication failed`（实为 443 阻断叠加），但同一 Token 经 api.github.com 验证返回 200 有效——**遇 auth failed 先查 443 可达性，勿急着换 Token**
 
+
+
+---
+
+## 2026-11-08 23:40 — 第二百零四次备份
+- **触发**：12h 周期自动化；距 203rd（2026-11-07 11:07，终态 01d1360 @354 + 1 笔回填 15143bf → 355）约 36.6 小时，**错过约 2 个窗口（11-07 23:07 / 11-08 11:07）后补跑**（本轮 23:07 窗口迟发约 33 分钟）；本次为第 204 次半日备份
+- **Git 状态**：核心代码零变更（核心文件 mtime 与 203rd 完全一致，最晚 package.json 2026-05-30 02:46）
+- **近 2 天变动**：仅记忆/日志类文件，无产品代码
+- **子模块/嵌套仓库脏状态**：citation-gen（m）、typing-test（m）、vocab-test（m）、math-practice（?）——与 203rd 完全一致，指针未变，属常态
+- **主仓库（操作前）**：355 commits 本地，HEAD=15143bf；`git ls-remote origin refs/heads/master` 实测 = 15143bf（一致，上轮无遗留占位）
+- **网络**：ls-remote 直连秒回，推送链路预期健康
+- **变更文件**：git-tracked 仅本文件（204th 记录追加）；gitignored 本地记忆同轮更新（2026-11-08.md 新建 / MEMORY.md / project-backup.md）
+- **操作**：新建 2026-11-08.md → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
+
+### ★ 204th 权威终态
+- **最终 HEAD**: 待回填
+- **commits**: 待回填
+- **remote URL**: 完成后恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **结论**: 204th 半日备份执行中
