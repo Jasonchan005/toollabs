@@ -3978,10 +3978,11 @@
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
 
 ### ★ 206th 权威终态
-- **最终 HEAD**: 待回填
-- **commits**: 待回填
-- **提交链**: be37b8e → 待回填
-- **git push**: 待执行
-- **remote URL**: 待推送后恢复
-- **工作树**: 待确认
-- **结论**: 待回填
+- **最终 HEAD**: `8a8adae`（8a8adaeee5943ea2c21470b2d73cf26fd9236b42）
+- **commits**: 360 本地 / 360 远端（0 差异，ls-remote 实测）
+- **提交链**: be37b8e → 8a8adae（23:10 一次推送成功，本轮无 443 阻断）
+- **git push**: ✅ 成功（`be37b8e..8a8adae master -> master`）
+- **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: ✅ 206th 半日备份完成，GitHub 完全同步，无核心代码变更
+- **备注**: 本轮另有 1 笔终态回填提交（仅改本文件），远端最终 361 commits；下轮以 `git ls-remote` 实测比对
