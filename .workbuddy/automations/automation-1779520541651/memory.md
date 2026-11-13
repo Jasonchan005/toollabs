@@ -4008,3 +4008,17 @@
 - **工作树**: 干净（仅四个嵌套仓库脏，指针未变，属常态）
 - **结论**: ✅ 207th 半日备份完成，GitHub 完全同步，无核心代码变更
 - **备注**: 本轮另有 1 笔终态回填提交（仅改记忆/档案），远端最终 363 commits；下轮以 `git ls-remote` 实测比对
+
+
+---
+
+## 2026-11-13 12:15 — 第二百零八次备份
+- **触发**：12h 周期自动化；距 207th（2026-11-12 11:17，终态 0c9a9d8 @362 + 1 笔回填 d3031e5 → 363）约 **25.0 小时**（**错过约 1 个窗口** 11-12 23:07 后补跑）；本次为第 208 次半日备份
+- **Git 状态**：核心代码零变更（核心文件 mtime 与 207th 完全一致，最晚 package.json 2026-05-30 02:46）；自 2026-11-12 11:30 后全项目无任何新增/修改文件
+- **近 1 天变动**：无任何产品代码
+- **嵌套仓库脏状态**：citation-gen（M）、typing-test（M）、vocab-test（M）、math-practice（M）——与 207th 完全一致，指针未变，属常态
+- **主仓库（操作前）**：363 commits 本地，HEAD=d3031e5（207th 终态回填提交）；`git ls-remote origin refs/heads/master` 实测 = d3031e5（一致，207th 回填已在远端，**无遗留占位**）
+- **网络**：ls-remote 秒回，本轮无 443 阻断
+- **变更文件**：git-tracked 仅本文件（208th 记录追加）；gitignored 本地记忆同轮更新：2026-11-13.md 新建 / MEMORY.md / project-backup.md
+- **操作**：新建 2026-11-13.md → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+- **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
