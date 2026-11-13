@@ -4050,3 +4050,4 @@
 - **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
 - **结论**: ✅ 209th 半日备份完成，GitHub 完全同步，无核心代码变更
 - **备注**: 发现系统指定读写路径（.workbuddy/memory/automations/...）与 git 跟踪路径（.workbuddy/automations/...）为两份文件，前者曾缺 208th 终态块，本轮已补齐并双写；下轮以 `git ls-remote` 实测比对
+- **更正（终态回填后）**: 最终 HEAD=6422e4e（6422e4e717e464438fe0a396656968a27aa1c03f），367 本地 / 367 远端（0 差异，ls-remote 实测）；提交链 07e8383 → 5104ae4（备份记录）→ 6422e4e（终态回填），两笔均一次推送成功、无 443 阻断
