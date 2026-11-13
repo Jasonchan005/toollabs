@@ -4041,3 +4041,12 @@
 - **变更文件**：git-tracked 仅本文件（209th 记录追加）；gitignored 本地记忆同轮更新（2026-11-14.md 新建 / MEMORY.md / project-backup.md）
 - **操作**：新建 2026-11-14.md → 更新 MEMORY.md（备份链轮换）→ 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
 - **结论**：待执行 git commit + push，终态以 project-backup.md 头部为权威
+### ☀ 209th 权威终态
+- **最终 HEAD**: `5104ae4`（5104ae4a9683f0b1af50bc10bd8cc25009519a2b）
+- **commits**: 366 本地 / 366 远端（0 差异，ls-remote 实测）
+- **提交链**: 07e8383 → 5104ae4（00:36 一次推送成功，本轮无 443 阻断）
+- **git push**: ✅ 成功（`07e8383..5104ae4 master -> master`）
+- **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **工作树**: 干净（仅 citation-gen / math-practice / typing-test / vocab-test 四个嵌套仓库脏，指针未变，属常态）
+- **结论**: ✅ 209th 半日备份完成，GitHub 完全同步，无核心代码变更
+- **备注**: 发现系统指定读写路径（.workbuddy/memory/automations/...）与 git 跟踪路径（.workbuddy/automations/...）为两份文件，前者曾缺 208th 终态块，本轮已补齐并双写；下轮以 `git ls-remote` 实测比对
