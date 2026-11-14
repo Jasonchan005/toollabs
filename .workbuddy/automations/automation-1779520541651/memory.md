@@ -4063,3 +4063,22 @@
 - **主仓库（操作前）**：368 commits 本地，HEAD=d2a858f，与远端一致
 - **变更文件**：git-tracked 仅本文件（210th 记录追加）；gitignored 本地记忆同轮更新（2026-11-14.md 追加 / MEMORY.md 备份链轮换 / project-backup.md 前插）
 - **操作**：2026-11-14.md 追加 → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
+
+### ★ 210th 权威终态（推送后回填）
+- **最终 HEAD**: `b0babf2`（b0babf24b5fd007d7dbcb38448a131069e5abc07）；备份记录提交 b0babf2（210th 单笔，无回填链）
+- **commits**: 369 本地 / 369 远端（0 差异，ls-remote 实测）
+- **git push**: ✅ 成功（`d2a858f..b0babf2` 一次推送成功，无 443 阻断）
+- **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **结论**: ✅ 第 210 次备份完成，无核心代码变更，GitHub 完全同步
+
+
+---
+
+## 2026-11-15 00:43 — 第二百一十一次备份
+- **触发**：12h 周期自动化；距 210th（2026-11-14 12:37，终态 b0babf2 @369）约 **12.1 小时**，正点触发（00:30 窗口），无错过窗口；本次为第 211 次半日备份
+- **开工核对**：`git ls-remote origin refs/heads/master` 秒回，实测远端 HEAD=b0babf2 = 本地 HEAD（210th 终态与上轮记录直接吻合，无遗留占位），无 443 阻断
+- **Git 状态**：核心代码零变更（核心文件 mtime 与 210th 完全一致，最晚 package.json 2026-05-30 02:46；find -newermt "2026-11-14 12:37" 仅命中记忆/档案类文件）
+- **嵌套仓库脏状态**：citation-gen（M）、typing-test（M）、vocab-test（M）、math-practice（?）——与 210th 一致，指针未变，属常态
+- **主仓库（操作前）**：369 commits 本地，HEAD=b0babf2，与远端一致
+- **变更文件**：git-tracked 仅本文件（211th 记录追加）；gitignored 本地记忆同轮更新（2026-11-15.md 新建 / MEMORY.md 备份链轮换 / project-backup.md 前插）
+- **操作**：新建 2026-11-15.md → 更新 MEMORY.md（备份链裁至 206-211，8690→8384 字节）→ 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
