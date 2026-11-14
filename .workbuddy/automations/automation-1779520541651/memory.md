@@ -4051,3 +4051,15 @@
 - **结论**: ✅ 209th 半日备份完成，GitHub 完全同步，无核心代码变更
 - **备注**: 发现系统指定读写路径（.workbuddy/memory/automations/...）与 git 跟踪路径（.workbuddy/automations/...）为两份文件，前者曾缺 208th 终态块，本轮已补齐并双写；下轮以 `git ls-remote` 实测比对
 - **更正（终态回填后）**: 最终 HEAD=6422e4e（6422e4e717e464438fe0a396656968a27aa1c03f），367 本地 / 367 远端（0 差异，ls-remote 实测）；提交链 07e8383 → 5104ae4（备份记录）→ 6422e4e（终态回填），两笔均一次推送成功、无 443 阻断
+
+
+---
+
+## 2026-11-14 12:37 — 第二百一十次备份
+- **触发**：12h 周期自动化；距 209th（2026-11-14 00:30，终态 d2a858f @368）约 **12.1 小时**，正点触发（12:30 窗口），无错过窗口；本次为第 210 次半日备份
+- **开工核对**：`git ls-remote` 秒回，实测远端 HEAD=d2a858f = 本地 HEAD（209th 更正终态与上轮档案记录直接吻合，无遗留占位），无 443 阻断
+- **Git 状态**：核心代码零变更（核心文件 find -newermt "2026-11-12 11:30" 零命中）；自 2026-11-12 11:30 后全项目（除记忆/档案更新外）无任何新增/修改文件
+- **嵌套仓库脏状态**：citation-gen（M）、typing-test（M）、vocab-test（M）、math-practice（?）——与 209th 一致，指针未变，属常态
+- **主仓库（操作前）**：368 commits 本地，HEAD=d2a858f，与远端一致
+- **变更文件**：git-tracked 仅本文件（210th 记录追加）；gitignored 本地记忆同轮更新（2026-11-14.md 追加 / MEMORY.md 备份链轮换 / project-backup.md 前插）
+- **操作**：2026-11-14.md 追加 → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板：username:token URL + 禁用 credential.helper），完成后恢复 remote URL
