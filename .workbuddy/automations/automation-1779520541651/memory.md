@@ -4122,7 +4122,7 @@
 - **操作**：新建 2026-11-16.md → 更新 MEMORY.md（备份链裁至 207-213）→ 前插 project-backup.md → 追加本文件 → git commit + push（标准模板），完成后恢复 remote URL
 
 ### ★ 213th 权威终态
-- **最终 HEAD**: `HEAD_PLACEHOLDER`；commits: COMMITS_PLACEHOLDER 本地 / COMMITS_PLACEHOLDER 远端
+- **最终 HEAD**: `db8c5b1`（备份记录提交）；commits: 374 本地（ls-remote 实测远端=db8c5b1，0 差异）；本轮另有 1 笔终态回填提交（375），以 ls-remote 为准，不再追加入链
 - **git push**: ✅ 成功
 - **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **结论**: ✅ 213th 半日备份完成，无核心代码变更，GitHub 完全同步
