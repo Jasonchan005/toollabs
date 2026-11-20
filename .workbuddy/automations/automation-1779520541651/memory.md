@@ -4265,7 +4265,7 @@
 - **操作**：新建 2026-11-21.md → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板），完成后恢复 remote URL
 
 ### ★ 221st 权威终态
-- **最终 HEAD**: 待回填（备份记录提交后追加；本轮另有终态回填，以 ls-remote 实测为准）
-- **git push**: 待回填
-- **remote URL**: 待回填
-- **结论**: 待回填
+- **最终 HEAD**: 备份记录提交 e0f12da（@390）；本轮另有终态回填提交（@391），以 ls-remote 实测为准，不再追加入链
+- **git push**: ✅ 备份记录一次成功（395f11f..e0f12da）；首次直推遇 443 阻断（curl/ls-remote 均 21s 超时），后台间隔 90s 重试第 3 次恢复并推送成功
+- **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **结论**: ✅ 221st 半日备份完成，无核心代码变更，GitHub 完全同步
