@@ -4283,7 +4283,7 @@
 - **操作**：追加本日志 → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add + commit + push（标准模板），完成后恢复 remote URL
 
 ### ★ 222nd 权威终态
-- **最终 HEAD**: 备份记录提交（待回填）；本轮另有终态回填提交，以 ls-remote 实测为准，不再追加入链
-- **git push**: （待回填）
+- **最终 HEAD**: 备份记录提交 637ede6（@392）；本轮另有终态回填提交（@393），以 ls-remote 实测为准，不再追加入链
+- **git push**: ✅ 两笔均一次成功（d61fd4f..637ede6 + 637ede6..终态回填），本轮无 443 阻断
 - **remote URL**: 已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **结论**: ✅ 222nd 半日备份完成，无核心代码变更，GitHub 完全同步
