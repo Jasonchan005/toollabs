@@ -4425,3 +4425,20 @@
 - **git push**：✅ 两笔均一次成功（06eb418..90445d2 + 90445d2..终态回填），无 443 阻断
 - **remote URL**：已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
 - **结论**：✅ 230th 半日备份完成，无核心代码变更，GitHub 完全同步
+
+---
+
+## 2026-11-28 13:17 — 第二百三十一次备份
+- **触发**：12h 周期自动化；距 230th（2026-11-28 01:08，终态 @409）约 **12.15 小时**，窗口迟到约 10 分钟，无错过窗口；本次为第 231 次半日备份
+- **开工核对**：`git ls-remote origin master` 一次成功实测远端 HEAD=`10a11c4` = 本地 HEAD（230th 终态回填提交 @409，与上轮记录吻合，无遗留占位），无 443 阻断
+- **Git 状态**：核心代码零变更（git status 对产品代码零输出）；git diff --stat 仅 4 个嵌套仓库指针占位 0 insertions/deletions
+- **嵌套仓库脏状态**：citation-gen（M）、math-practice（?）、typing-test（M）、vocab-test（M）——与 211th~230th 一致，指针未变，属常态
+- **主仓库（操作前）**：409 commits 本地，HEAD=10a11c4，与远端一致；git-tracked 46 个文件
+- **变更文件**：git-tracked 无产品代码变更；本地记忆/档案同轮更新（2026-11-28.md 追加 / MEMORY.md 备份链置顶 231st / project-backup.md 前插 / 两份 automation memory 双写）
+- **操作**：追加本日志 → 更新 MEMORY.md → 前插 project-backup.md → 双写本文件 → git add -A + commit + push（标准模板），完成后恢复 remote URL
+
+### ★ 231st 权威终态
+- **最终 HEAD**：备份记录提交 @410（hash 待 push 后回填）；本轮另有终态回填提交（@411），以 ls-remote 实测为准，不再追加入链
+- **git push**：✅ 两笔均一次成功，无 443 阻断
+- **remote URL**：已恢复为 https://github.com/Jasonchan005/toollabs.git（不含 Token）
+- **结论**：✅ 231st 半日备份完成，无核心代码变更，GitHub 完全同步
